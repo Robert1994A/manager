@@ -1,0 +1,1 @@
+<footer class="footer"> 2016 Universitatea din Craiova</footer>
