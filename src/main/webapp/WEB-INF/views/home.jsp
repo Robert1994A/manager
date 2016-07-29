@@ -50,7 +50,7 @@
 
 
 <body>
-sdasdasdas
+
 	<!-- Aside -->
 	<jsp:include page="includes/navbar.jsp"></jsp:include>
 	<!-- Aside Ends -->
