@@ -32,4 +32,9 @@ public class TemplatesController {
     public String getAddFormTemplatePage() {
         return "/templates/add_form";
     }
+    
+    @RequestMapping(value = "/templates/addContract")
+    public String getAddContractTemplatePage() {
+        return "/templates/addContract";
+    }
 }

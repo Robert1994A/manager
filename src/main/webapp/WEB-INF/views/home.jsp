@@ -1,92 +1,129 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en" ng-app="HomeApp">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Admitere</title>
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	href="./resources/assets-minified/images/icons/apple-touch-icon-144-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	href="./resources/assets-minified/images/icons/apple-touch-icon-114-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	href="./resources/assets-minified/images/icons/apple-touch-icon-72-precomposed.png" />
+<link rel="apple-touch-icon-precomposed"
+	href="./resources/assets-minified/images/icons/apple-touch-icon-57-precomposed.png" />
+<link rel="shortcut icon"
+	href="./resources/assets-minified/images/icons/favicon.png" />
 
-<link rel="shortcut icon" href='./resources/img/favicon_1.ico'>
-
-<title>Feedback</title>
-
-<!-- Bootstrap core CSS -->
-<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="./resources/css/bootstrap-reset.css" rel="stylesheet">
+<script type="text/javascript"
+	src="./resources/assets-minified/js-core.js" /></script>
 
 
-<!--Animation css-->
-<link href="./resources/css/animate.css" rel="stylesheet">
+<script type="text/javascript">
+	$(window).load(function() {
+		setTimeout(function() {
+			$('#loading').fadeOut(400, "linear");
+		}, 300);
+	});
+</script>
 
-<!--Icon-fonts css-->
-<link href="./resources/assets/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-<link href="./resources/assets/ionicon/css/ionicons.min.css"
-	rel="stylesheet" />
+<style>
+#loading {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: block;
+	background: #fff;
+	z-index: 10000;
+}
 
-<!-- Custom styles for this template -->
-<link href="./resources/css/style.css" rel="stylesheet">
-<link href="./resources/css/helper.css" rel="stylesheet">
+#loading img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -23px 0 0 -23px;
+}
+</style>
 
-<!--Date picker css-->
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css"
-	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="./resources/bootstrap/css/bootstrap.css">
 
-<script src="./resources/js/angular.js"></script>
-<script src="./resources/js/angular-route.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/demo-widgets.css">
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-<!--[if lt IE 9]>
-    <script src="./resources/js/html5shiv.js"></script>
-    <script src="./resources/js/respond.min.js"></script>
-    <![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/helpers/helpers-all.css" />
 
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/elements/elements-all.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/icons/fontawesome/fontawesome.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/icons/linecons/linecons.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/snippets/snippets-all.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/applications/mailbox.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/themes/supina/layout.css" />
+
+<link id="layout-color" rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/themes/supina/default/layout-color.css" />
+
+<link id="framework-color" rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/themes/supina/default/framework-color.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/themes/supina/border-radius.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/assets-minified/helpers/colors.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="./resources/bootstrap/css/bootstrap.css" />
+
+<script src="./resources/myscripts/angular/angular.js"></script>
+
+<script src="./resources/myscripts/angular/angular-route.js"></script>
 
 </head>
+<body ng-app="HomeApp">
+	<div id="loading">
+		<img src="./resources/assets-minified/images/spinner/loader-dark.gif"
+			alt="Loading...">
+	</div>
+	<div id="sb-site">
+		<div id="page-wrapper">
+
+			<%@ include file="./includes/page-header.jsp"%>
+
+			<%@ include file="./includes/page-sidebar.jsp"%>
 
 
-<body>
-
-	<!-- Aside -->
-	<jsp:include page="includes/navbar.jsp"></jsp:include>
-	<!-- Aside Ends -->
-
-	<!-- Main Content Start -->
-	<section class="content">
-
-		<jsp:include page="includes/header.jsp"></jsp:include>
-
-		<!-- Page Content Start -->
-		<div class="wraper container-fluid">
-			<ng-view></ng-view>
+			<div id="page-content-wrapper" class="rm-transition">
+				<div id="page-content">
+					<ng-view></ng-view>
+				</div>
+			</div>
 		</div>
-		<!-- Page Content Ends -->
+	</div>
 
-		<!-- Footer Start -->
-		<jsp:include page="includes/footer.jsp"></jsp:include>
-		<!-- Footer Ends -->
+	<script type="text/javascript"
+		src="./resources/assets-minified/demo-widgets.js"></script>
 
-
-	</section>
-	<!-- Main Content Ends -->
-
-	<!-- js placed at the end of the document so the pages load faster -->
-	<script src="./resources/js/jquery.js"></script>
-	<script src="./resources/js/bootstrap.min.js"></script>
-	<script src="./resources/js/pace.min.js"></script>
-	<script src="./resources/js/modernizr.min.js"></script>
-	<script src="./resources/js/wow.min.js"></script>
-	<script src="./resources/js/jquery.nicescroll.js"
-		type="text/javascript"></script>
-	<script src="./resources/js/jquery.app.js"></script>
-
-	<!-- Sweet Alert -->
-	<script src="./resources/assets/sweet-alert/sweet-alert.min.js"></script>
-	<script src="./resources/assets/sweet-alert/sweet-alert.init.js"></script>
 	<script src="./resources/myscripts/routing.js"></script>
 	<script src="./resources/myscripts/services/UserService.js"></script>
 	<script src="./resources/myscripts/controllers/UserController.js"></script>
@@ -94,18 +131,5 @@
 	<script src="./resources/myscripts/controllers/FormController.js"></script>
 	<script src="./resources/myscripts/controllers/HomeController.js"></script>
 
-
-	<!--form validation-->
-	<script type="text/javascript"
-		src="./resources/assets/jquery.validate/jquery.validate.min.js"></script>
-	<!--form validation init-->
-	<script
-		src="./resources/assets/jquery.validate/form-validation-init.js"></script>
-
-	<script src="./resources/assets/timepicker/bootstrap-timepicker.min.js"></script>
-	<script src="./resources/assets/timepicker/bootstrap-datepicker.js"></script>
-
-
 </body>
-
 </html>
