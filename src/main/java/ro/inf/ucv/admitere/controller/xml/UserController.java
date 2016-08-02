@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import ro.inf.ucv.admitere.entity.User;
 import ro.inf.ucv.admitere.exceptions.UserNotFound;
+import ro.inf.ucv.admitere.list.UserList;
 import ro.inf.ucv.admitere.service.UserService;
-import ro.inf.ucvadmitere.list.UserList;
 
 import javax.xml.bind.JAXBException;
 import java.util.List;

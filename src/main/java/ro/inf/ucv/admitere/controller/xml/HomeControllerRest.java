@@ -13,10 +13,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ro.inf.ucv.admitere.entity.Role;
 import ro.inf.ucv.admitere.entity.User;
 import ro.inf.ucv.admitere.exceptions.UserNotFound;
+import ro.inf.ucv.admitere.list.UserList;
 import ro.inf.ucv.admitere.service.RoleService;
 import ro.inf.ucv.admitere.service.UserService;
 import ro.inf.ucv.admitere.utils.Generator;
-import ro.inf.ucvadmitere.list.UserList;
 
 import javax.xml.bind.JAXBException;
 import java.util.ArrayList;

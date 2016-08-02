@@ -5,13 +5,5 @@
     <persistence-unit name="ucv">
         <class>ro.inf.ucv.admitere.entity.User</class>
         <class>ro.inf.ucv.admitere.entity.Role</class>
-        <class>ro.inf.ucv.admitere.entity.Answer</class>
-        <class>ro.inf.ucv.admitere.entity.AnswerOptionTemplate</class>
-        <class>ro.inf.ucv.admitere.entity.AnswerOption</class>
-        <class>ro.inf.ucv.admitere.entity.Question</class>
-        <class>ro.inf.ucv.admitere.entity.QuestionTemplate</class>
-        <class>ro.inf.ucv.admitere.entity.Survey</class>
-        <class>ro.inf.ucv.admitere.entity.SurveyData</class>
-        <class>ro.inf.ucv.admitere.entity.SurveyTemplate</class>
     </persistence-unit>
 </persistence>

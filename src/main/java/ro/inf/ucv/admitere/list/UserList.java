@@ -1,4 +1,4 @@
-package ro.inf.ucvadmitere.list;
+package ro.inf.ucv.admitere.list;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
