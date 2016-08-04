@@ -5,5 +5,7 @@
     <persistence-unit name="ucv">
         <class>ro.inf.ucv.admitere.entity.User</class>
         <class>ro.inf.ucv.admitere.entity.Role</class>
+        <class>ro.inf.ucv.admitere.entity.Departament</class>
+        <class>ro.inf.ucv.admitere.entity.ContractPage</class>
     </persistence-unit>
 </persistence>

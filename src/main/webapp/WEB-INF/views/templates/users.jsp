@@ -73,9 +73,8 @@
 		<tbody>
 			<tr class="{{checked ? 'active' : ''}}"
 				ng-repeat="user in users | filter:searchUser| limitTo:rowLimit | orderBy:sortColumn">
-				<td><label class="cr-styled"> <input type="checkbox"
-						ng-model="checked"><i class="fa"></i>
-				</label></td>
+				<td> <input type="checkbox" class="custom-checkbox"
+						ng-model="checked"></td>
 				<td ng-hide="!showUsername">{{user.username}}</td>
 				<td ng-hide="!showEmail">{{user.email}}</td>
 				<td ng-hide="!showRoles">

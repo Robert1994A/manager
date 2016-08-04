@@ -1,37 +1,44 @@
-<div id="page-sidebar" class="rm-transition">
-	<div id="page-sidebar-wrapper">
-		<div id="sidebar-top">
-			<div class="tab-content">
-				<div class="tab-pane clearfix fade active in" id="tab-example-1">
-					<div class="user-profile-sm clearfix">
-						<img width="45" class="img-rounded"
-							src="./resources/assets-minified/dummy-images/gravatar.jpg"
-							alt="">
-						<div class="user-welcome">
-							Welcome back, <b>admin</b>
+<div class="sidebar sidebar-main sidebar-fixed">
+				<div class="sidebar-content">
+
+					<!-- User menu -->
+					<div class="sidebar-user">
+						<div class="category-content">
+							<div class="media">
+								<a href="#" class="media-left"><img src="./resources/assets/images/demo/users/face11.jpg" class="img-circle img-sm" alt=""></a>
+								<div class="media-body">
+									<span class="media-heading text-semibold">admin@gmail.com</span>
+									<div class="text-size-mini text-muted">
+										<i class="icon-pin text-size-small"></i> &nbsp;Craiova
+									</div>
+								</div>
+
+								<div class="media-right media-middle">
+									<ul class="icons-list">
+										<li>
+											<a href="#"><i class="icon-cog3"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
+					<!-- /user menu -->
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div class="category-content no-padding">
+							<ul class="navigation navigation-main navigation-accordion">
+
+								<!-- Main -->
+								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+								<li><a href="#/home"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+								<li><a href="#/users"><i class="icon-home4"></i> <span>Users</span></a></li>
+								<li><a href="#/addContract"><i class="icon-home4"></i> <span>Add contract</span></a></li>
+								<!-- /main -->
+							</ul>
+						</div>
+					</div>
+					<!-- /main navigation -->
 				</div>
 			</div>
-		</div>
-		<div id="sidebar-menu">
-			<ul>
-				<li class="divider"></li>
-
-				<li><a href="#/home" title="Dashboard"><i
-						class="glyph-icon icon-linecons-tv"></i> <span>Dashboard</span></a></li>
-
-				<li class="divider"></li>
-
-				<li><a href="#/users" title="Users"><i
-						class="glyph-icon icon-linecons-tv"></i> <span>Users</span></a></li>
-				<li class="divider"></li>
-
-				<li><a href="#/addContract" title="Add contract"><i
-						class="glyph-icon icon-linecons-tv"></i> <span>Add contract</span></a></li>
-
-				<li class="divider"></li>
-			</ul>
-		</div>
-	</div>
-</div>

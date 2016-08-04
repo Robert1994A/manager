@@ -18,7 +18,7 @@ app.config(function ($routeProvider, $locationProvider) {
         controller: "formsController"
     }).when("/addContract", {
         templateUrl: "templates/addContract.html",
-        controller: "formsController"
+        controller: "ContractPageController"
     }).otherwise({
         redirectTo: "/home"
     })

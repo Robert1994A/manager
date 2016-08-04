@@ -19,6 +19,7 @@
 			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<security:intercept-url pattern="/login"
 			access="permitAll()" />
+			<security:csrf disabled="true"/>
 
 	</security:http>
 
