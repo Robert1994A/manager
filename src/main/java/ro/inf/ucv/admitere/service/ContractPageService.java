@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ro.inf.ucv.admitere.entity.ContractPage;
@@ -35,5 +37,9 @@ public class ContractPageService {
 
 	public void updateContractPage(ContractPage contractPage) {
 		contractPageRepository.save(contractPage);
+	}
+
+	public Page<ContractPage> findAll(Pageable pageable) {
+		return contractPageRepository.findAll(pageable);
 	}
 }

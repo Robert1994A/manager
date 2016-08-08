@@ -1,57 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en" ng-app="HomeApp">
+<html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admitere</title>
-	
-	<script src="./resources/myscripts/angular/angular.js"></script>
-	<script src="./resources/myscripts/angular/angular-route.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admitere</title>
 
-	<!-- Global stylesheets -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-	<link href="./resources/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
-	<link href="./resources/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-	<link href="./resources/assets/css/core.css" rel="stylesheet" type="text/css">
-	<link href="./resources/assets/css/components.css" rel="stylesheet" type="text/css">
-	<link href="./resources/assets/css/colors.css" rel="stylesheet" type="text/css">
-	<!-- /global stylesheets -->
+<script type="text/javascript"
+	src="./resources/assets/js/core/libraries/jquery.min.js"></script>
+<script src="./resources/myscripts/angular/angular.js"></script>
 
-	<!-- Core JS files -->
-	<script type="text/javascript" src="./resources/assets/js/plugins/loaders/pace.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/core/libraries/jquery.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/core/libraries/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/loaders/blockui.min.js"></script>
-	<!-- /core JS files -->
+<script src="./resources/myscripts/angular/ng_infinite_scroll.js"></script>
+<script src="./resources/myscripts/angular/angular-route.js"></script>
 
-	<!-- Theme JS files -->
-	<script type="text/javascript" src="./resources/assets/js/plugins/visualization/d3/d3.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/switchery.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/ui/moment/moment.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/pickers/daterangepicker.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/ui/nicescroll.min.js"></script>
-	<!-- /theme JS files -->
-	
-	<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/pages/layout_fixed_custom.js"></script>
+<!-- Global stylesheets -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"
+	rel="stylesheet" type="text/css">
+<link href="./resources/assets/css/icons/icomoon/styles.css"
+	rel="stylesheet" type="text/css">
+<link href="./resources/assets/css/bootstrap.css" rel="stylesheet"
+	type="text/css">
+<link href="./resources/assets/css/core.css" rel="stylesheet"
+	type="text/css">
+<link href="./resources/assets/css/components.css" rel="stylesheet"
+	type="text/css">
+<link href="./resources/assets/css/colors.css" rel="stylesheet"
+	type="text/css">
+<!-- /global stylesheets -->
 
+<!-- Core JS files -->
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/loaders/pace.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/core/libraries/jquery.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/core/libraries/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/loaders/blockui.min.js"></script>
+<!-- /core JS files -->
 
+<!-- Theme JS files -->
+
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/visualization/d3/d3.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/forms/styling/switchery.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/ui/moment/moment.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/pickers/daterangepicker.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/ui/nicescroll.min.js"></script>
+<!-- /theme JS files -->
+
+<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/pages/layout_fixed_custom.js"></script>
+<!-- /form validation -->
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/forms/validation/validate.min.js"></script>
+<script type="text/javascript"
+	src="./resources/assets/js/pages/form_validation.js"></script>
 
 
 </head>
 
-<body class="navbar-top">
-
+<body class="navbar-top" ng-app="HomeApp">
 	<!-- Main navbar -->
-	<%@ include file="./includes/page-navbar.jsp" %>
+	<%@ include file="./includes/page-navbar.jsp"%>
 	<!-- /main navbar -->
 
 
@@ -62,7 +89,7 @@
 		<div class="page-content">
 
 			<!-- Main sidebar -->
-			<%@ include file="./includes/page-sidebar.jsp" %>
+			<%@ include file="./includes/page-sidebar.jsp"%>
 			<!-- /main sidebar -->
 
 
@@ -70,18 +97,19 @@
 			<div class="content-wrapper">
 
 				<!-- Page header -->
-				<%@ include file="./includes/page-header.jsp" %>
+				<!--  <%@ include file="./includes/page-header.jsp"%> -->
 				<!-- /page header -->
 
 
 				<!-- Content area -->
 				<div class="content">
-				
-					<!-- ng-view -->
+
+					<!-- Content -->
 					<ng-view></ng-view>
+					<!-- /content -->
 
 					<!-- Footer -->
-					<%@ include file="./includes/page-footer.jsp" %>
+					<%@ include file="./includes/page-footer.jsp"%>
 					<!-- /footer -->
 
 				</div>
@@ -95,7 +123,6 @@
 
 	</div>
 	<!-- /page container -->
-	
 
 	<script src="./resources/myscripts/routing.js"></script>
 	<script src="./resources/myscripts/services/UserService.js"></script>
@@ -104,7 +131,19 @@
 	<script src="./resources/myscripts/controllers/FormController.js"></script>
 	<script src="./resources/myscripts/controllers/HomeController.js"></script>
 	<script src="./resources/myscripts/services/ContractPageService.js"></script>
-	<script src="./resources/myscripts/controllers/ContractPageController.js"></script>
+	<script
+		src="./resources/myscripts/controllers/ContractPageController.js"></script>
+
+	<script type="text/javascript">
+		$("#navbar li").click(function(e) {
+			$("li").removeClass("active");
+			$(this).addClass("active");
+		});
+		$(".navbar-brand").click(function() {
+			$("#navbar li").removeClass("active");
+			$("#homePage").addClass("active");
+		});
+	</script>
 
 </body>
 </html>

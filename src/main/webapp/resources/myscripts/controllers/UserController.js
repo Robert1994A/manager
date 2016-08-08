@@ -1,23 +1,15 @@
-app.controller("usersController", function ($scope, UserService) {
-    UserService.getAllUsers(function (users) {
-        $scope.users = users;
-    });
-    $scope.rowLimit = 10;
-    $scope.perPages = [25, 50, 100];
-    $scope.sortColumn = 'username';
+app.controller("usersController", function($scope, UserService, Reddit) {
 
+	$scope.reddit = new Reddit();
 
-    $scope.showUsername = true;
-    $scope.showEmail = true;
-    $scope.showRoles = true;
-    $scope.showAction = true;
+	$scope.lastPage = $scope.reddit.lastPage;
 
 });
 
-app.controller("userDetailsController", function ($scope, $routeParams,
-                                                  UserService) {
-    var id = $routeParams.id;
-    UserService.getUser(id).success(function (response) {
-        $scope.user = response;
-    });
+app.controller("userDetailsController", function($scope, $routeParams,
+		UserService) {
+	var id = $routeParams.id;
+	UserService.getUser(id).success(function(response) {
+		$scope.user = response;
+	});
 });

@@ -11,57 +11,12 @@
 
 $(function() {
 
-
-    // Form components
-    // ------------------------------
-
-    // Switchery toggles
-    var elems = Array.prototype.slice.call(document.querySelectorAll('.switchery'));
-    elems.forEach(function(html) {
-        var switchery = new Switchery(html);
-    });
-
-
-    // Bootstrap switch
-    $(".switch").bootstrapSwitch();
-
-
-    // Bootstrap multiselect
-    $('.multiselect').multiselect({
-        checkboxName: 'vali'
-    });
-
-
-    // Touchspin
-    $(".touchspin-postfix").TouchSpin({
-        min: 0,
-        max: 100,
-        step: 0.1,
-        decimals: 2,
-        postfix: '%'
-    });
-
-
-    // Select2 select
-    $('.select').select2({
-        minimumResultsForSearch: Infinity
-    });
-
-
-    // Styled checkboxes, radios
-    $(".styled, .multiselect-container input").uniform({ radioClass: 'choice' });
-
-
-    // Styled file input
-    $(".file-styled").uniform({
-        fileButtonClass: 'action btn bg-blue'
-    });
-
-
-
     // Setup validation
     // ------------------------------
 
+	$("#submit").click(function(){
+		
+	
     // Initialize
     var validator = $(".form-validate-jquery").validate({
         ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
@@ -181,7 +136,7 @@ $(function() {
             agree: "Please accept our policy"
         }
     });
-
+	});
 
     // Reset form
     $('#reset').on('click', function() {

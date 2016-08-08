@@ -1,98 +1,66 @@
 
-<div class="example-box-wrapper">
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="dropdown  pull-right">
-					<button class="btn btn-default dropdown-toggle"
-						data-toggle="dropdown" aria-expanded="false">
-						Display <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu pull-right">
-						<li><label class="cr-styled"> <input type="checkbox"
-								ng-model="showUsername"><i class="fa"></i>Username
-						</label></li>
-						<li><label class="cr-styled"> <input type="checkbox"
-								ng-model="showEmail"><i class="fa"></i>Email
-						</label></li>
-						<li><label class="cr-styled"> <input type="checkbox"
-								ng-model="showRoles"><i class="fa"></i>Roles
-						</label></li>
-						<li><label class="cr-styled"> <input type="checkbox"
-								ng-model="showAction"><i class="fa"></i>Action
-						</label></li>
-					</ul>
+<script type="text/javascript">
+	$(window).load(function() {
+		setTimeout(function() {
+			$('#loading').fadeOut(400, "linear");
+		}, 300);
+	});
+</script>
+
+<div class="panel panel-flat">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Roles</th>
+				</tr>
+			</thead>
+			<tbody infinite-scroll='reddit.nextPage()'
+				infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1'>
+				<tr ng-repeat='item in reddit.items'>
+					<td>{{item.id}}</td>
+					<td>{{item.username}}</td>
+					<td>{{item.email}}</td>
+					<td>
+				<tr ng-repeat="role in item.roles">
+					<td>{{role.name}}</td>
+				</tr>
+				</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+		<span ng-if="!reddit.lastPage">
+			<div ng-show='reddit.busy'>
+				<div class="col-lg-5"></div>
+				<div id="loading">
+					<img src="./resources/assets/images/spinner/loader-dark.gif"
+						alt="Loading...">
 				</div>
+				<div class="col-lg-5"></div>
+			</div>
+		</span>
+
+		<div ng-show='reddit.lastPage'>
+			<div class="alert bg-danger">
+				<button type="button" class="close" data-dismiss="alert">
+					<span>X</span><span class="sr-only">Close</span>
+				</button>
+				<span class="text-semibold">No more records to retrieve!</span>
 			</div>
 		</div>
-
-		<form class="form-inline" role="form">
-			<div class="form-group col-md-4">
-				<label>Per page</label> <select class="form-control"
-					ng-model="rowLimit">
-					<option selected="selected">10</option>
-					<option ng-repeat="i in perPages">{{i}}</option>
-				</select>
-			</div>
-			<div class="form-group col-md-4">
-				<div class="input-group">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-effect-ripple btn-primary">
-							<i class="fa fa-search"></i>
-						</button>
-					</span> <input type="text" id="example-input1-group2"
-						ng-model="searchUser" name="example-input1-group2"
-						class="form-control" placeholder="Search">
-				</div>
-			</div>
-			<div class="form-group col-md-4">
-				<label>Sort By</label> <select ng-model="sortColumn"
-					class="form-control">
-					<option value="username">Username ASC</option>
-					<option value="!username">Username DESC</option>
-					<option value="email">Email ASC</option>
-					<option value="!email">Email DESC</option>
-				</select>
-			</div>
-		</form>
 	</div>
 </div>
 
-<div class="example-box-wrapper">
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th><input type="checkbox" ng-model="checked"><i
-					class="fa"></i></th>
-				<th>Username</th>
-				<th>Email</th>
-				<th>Roles</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="{{checked ? 'active' : ''}}"
-				ng-repeat="user in users | filter:searchUser| limitTo:rowLimit | orderBy:sortColumn">
-				<td> <input type="checkbox" class="custom-checkbox"
-						ng-model="checked"></td>
-				<td ng-hide="!showUsername">{{user.username}}</td>
-				<td ng-hide="!showEmail">{{user.email}}</td>
-				<td ng-hide="!showRoles">
-					<div class="form-inline">
-						<span ng-repeat="role in user.roles">{{role.name}},</span>
-					</div>
-				</td>
-				<td ng-hide="!showAction">
-					<div class="form-inline">
-						<a class="btn btn-icon btn-warning m-b-5"
-							href="#/users/{{user.id}}"> <i class="fa fa-wrench"></i>
-						</a>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+
+
+
+
+
 
 
 

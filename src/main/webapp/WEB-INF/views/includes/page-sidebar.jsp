@@ -28,13 +28,23 @@
 					<!-- Main navigation -->
 					<div class="sidebar-category sidebar-category-visible">
 						<div class="category-content no-padding">
-							<ul class="navigation navigation-main navigation-accordion">
+							<ul class="navigation navigation-main navigation-accordion" id="navbar">
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li><a href="#/home"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+								<li id="homePage"><a href="#/home"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+								
+								<!-- User -->
+								<li class="navigation-header"><span>User</span> <i class="icon-menu" title="Forms"></i></li>
 								<li><a href="#/users"><i class="icon-home4"></i> <span>Users</span></a></li>
+								<!-- /user -->
+								
+								<!-- Contract -->
+								<li class="navigation-header"><span>Contract</span> <i class="icon-menu" title="Forms"></i></li>
 								<li><a href="#/addContract"><i class="icon-home4"></i> <span>Add contract</span></a></li>
+								<li><a href="#/contracts"><i class="icon-home4"></i> <span>Contracts</span></a></li>
+								<!-- /contract -->
+								
 								<!-- /main -->
 							</ul>
 						</div>
