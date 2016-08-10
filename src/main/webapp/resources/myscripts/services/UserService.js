@@ -13,16 +13,23 @@ app.factory('UserService', function($http) {
 				url : applicationName + "json/users/" + id + ".json",
 				method : "get"
 			});
+		},
+		getUsersCount : function() {
+			return $http({
+				url : applicationName + "json/users/countUsers",
+				method : "get"
+			});
 		}
 	};
 });
 
 app.factory('Reddit', function($http) {
-	var Reddit = function() {
+	var Reddit = function(usersCount) {
 		this.items = [];
 		this.busy = false;
 		this.after = 0;
 		this.lastPage = false;
+		this.usersCount = usersCount;
 	};
 
 	Reddit.prototype.nextPage = function() {
@@ -30,7 +37,7 @@ app.factory('Reddit', function($http) {
 			return;
 		this.busy = true;
 
-		if (this.after == 3) {
+		if (this.after == this.usersCount) {
 			this.lastPage = true;
 		} else {
 			var url = applicationName + "json/users/paginate?pageNumber="

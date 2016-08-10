@@ -1,8 +1,21 @@
-app.controller("usersController", function($scope, UserService, Reddit) {
+app.controller("usersController", function($scope, UserService, Reddit,
+		$timeout) {
 
-	$scope.reddit = new Reddit();
+	$scope.reddit;
+	
+	UserService.getUsersCount().success(
+			function(data, status, headers, config) {
+				if (status === 200) {
+					$scope.usersCount = data.countUsers;
+					if ($scope.usersCount % 20 != 0) {
+						$scope.usersCount += 1;
+					}
 
-	$scope.lastPage = $scope.reddit.lastPage;
+					$scope.reddit = new Reddit($scope.usersCount / 20);
+
+					$scope.lastPage = $scope.reddit.lastPage;
+				}
+			});
 
 });
 

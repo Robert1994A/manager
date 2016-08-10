@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ro.inf.ucv.admitere.entity.User;
 import ro.inf.ucv.admitere.exceptions.UserNotFound;
+import ro.inf.ucv.admitere.json.objects.UsersCountObject;
 
 @RestController
 public class UserController extends BaseController {
@@ -26,6 +27,13 @@ public class UserController extends BaseController {
 			return null;
 		}
 		return user;
+	}
+
+	@RequestMapping(value = "/json/users/countUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody UsersCountObject countUsersJSON() {
+		UsersCountObject usersCountObject = new UsersCountObject();
+		usersCountObject.setCountUsers(userService.count());
+		return usersCountObject;
 	}
 
 	@RequestMapping(value = "/json/users.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

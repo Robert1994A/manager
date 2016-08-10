@@ -1,6 +1,8 @@
 package ro.inf.ucv.admitere.controller.json;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,27 +11,15 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import ro.inf.ucv.admitere.entity.Role;
 import ro.inf.ucv.admitere.entity.User;
-import ro.inf.ucv.admitere.service.RoleService;
-import ro.inf.ucv.admitere.service.UserService;
 import ro.inf.ucv.admitere.utils.Generator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 @EnableWebMvc
-public class HomeControllerRest {
-
-
-    @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    private UserService userService;
-
+public class HomeControllerRest extends BaseController{
+	
     public void initDatabase() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         Generator myGenerator = new Generator();
@@ -58,7 +48,7 @@ public class HomeControllerRest {
         List<Role> rolesUser = new ArrayList<Role>();
         rolesUser.add(roleUser);
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             User userAdmin = new User();
             userAdmin.setEnabled(true);
             userAdmin.setEmail("admin@gmail.com" + i);
@@ -69,7 +59,7 @@ public class HomeControllerRest {
             userService.save(userAdmin);
         }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 200; i++) {
             User moderator = new User();
             moderator.setEnabled(true);
             moderator.setEmail("moderator@gmail.com" + i);
@@ -80,7 +70,7 @@ public class HomeControllerRest {
             userService.save(moderator);
         }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 300; i++) {
             User user1 = new User();
             user1.setEnabled(true);
             user1.setEmail("user@gmail.com" + i);
