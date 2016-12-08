@@ -16,7 +16,7 @@ app.controller("ContractPageController", function($scope, ContractPageService) {
     };
     
     function appendInput(parameterName){
-    	return "<div class=\"form-group\" id=\"row_"+parameterName+"\"><label class=\"control-label col-lg-3\">"+parameterName+"<spanclass=\"text-danger\">*</span></label><div class=\"col-lg-8\"><input type=\"text\" name="+parameterName+" class=\"form-control\" placeholder=\"Insert our "+parameterName+"\"></div><div class=\"col-lg-1\"><button type=\"button\" ng-click=\"deleteParameter("+parameterName+")\" class=\"form-control btn-danger\">X</button></div>";
+    	return "<div class=\"form-group\" id=\"row_"+parameterName+"\"><label class=\"control-label col-lg-3\">"+parameterName+"<spanclass=\"text-danger\">*</span></label><div class=\"col-lg-8\"><input type=\"text\" name="+parameterName+" class=\"form-control\" placeholder=\"Insert our "+parameterName+"\"></div><div class=\"col-lg-1\"><button type=\"button\" ng-click='deleteParameter(\""+parameterName+"\")' class=\"form-control btn-danger\">X</button></div>";
     }
 	
 	function getAllContractPage() {

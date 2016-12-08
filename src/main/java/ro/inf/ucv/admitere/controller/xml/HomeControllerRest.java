@@ -67,7 +67,7 @@ public class HomeControllerRest {
             User userAdmin = new User();
             userAdmin.setEnabled(true);
             userAdmin.setEmail("admin@gmail.com" + i);
-            userAdmin.setToken("tokenAdmin" + i);
+            //userAdmin.setToken("tokenAdmin" + i);
             userAdmin.setUsername("admin" + i);
             userAdmin.setPassword(encoder.encode("admin" + i));
             userAdmin.setRoles(roleSuperAdmin);
@@ -78,7 +78,7 @@ public class HomeControllerRest {
             User user1 = new User();
             user1.setEnabled(true);
             user1.setEmail("user@gmail.com" + i);
-            user1.setToken("tokenUser" + i);
+            //user1.setToken("tokenUser" + i);
             user1.setUsername("user" + i);
             user1.setPassword(encoder.encode("user" + i));
             user1.setRoles(rolesUser);
@@ -89,7 +89,7 @@ public class HomeControllerRest {
             User moderator = new User();
             moderator.setEnabled(true);
             moderator.setEmail("moderator@gmail.com" + i);
-            moderator.setToken("tokenModerator" + i);
+            //moderator.setToken("tokenModerator" + i);
             moderator.setUsername(myGenerator.getGeneratedString());
             moderator.setPassword(encoder.encode("moderator" + i));
             moderator.setRoles(rolesModerator);

@@ -1,28 +1,58 @@
 app.controller("usersController", function($scope, UserService, Reddit,
-		$timeout) {
+		$timeout, $uibModal, $log) {
 
-	$scope.reddit;
-	
-	UserService.getUsersCount().success(
-			function(data, status, headers, config) {
-				if (status === 200) {
-					$scope.usersCount = data.countUsers;
-					if ($scope.usersCount % 20 != 0) {
-						$scope.usersCount += 1;
-					}
+	$scope.perPage = 10;
 
-					$scope.reddit = new Reddit($scope.usersCount / 20);
+	$scope.sortBy = "id";
 
-					$scope.lastPage = $scope.reddit.lastPage;
-				}
-			});
+	$scope.sortDirection = "ASC";
 
+	$scope.reddit = new Reddit($scope.perPage, $scope.sortBy,
+			$scope.sortDirection, "");
+
+	$scope.lastPage = $scope.reddit.lastPage;
+
+	$scope.searchUser = function() {
+		$scope.reddit = new Reddit($scope.perPage, $scope.sortBy,
+				$scope.sortDirection, $scope.searchUserValue);
+
+		$scope.reddit.nextPage();
+
+		$scope.lastPage = $scope.reddit.lastPage;
+	}
+
+	$scope.animationsEnabled = true;
+
+	$scope.viewUserDetails = function(id) {
+		var modalInstance = $uibModal.open({
+			animation : $scope.animationsEnabled,
+			templateUrl : './modals/singleUserModal.html/' + id,
+			controller : 'singleUserModal'
+		});
+	};
+
+	$scope.toggleAnimation = function() {
+		$scope.animationsEnabled = !$scope.animationsEnabled;
+	};
+
+});
+
+app.controller('singleUserModal', function($scope, $uibModalInstance) {
+	$scope.ok = function() {
+		$uibModalInstance.close();
+	};
+
+	$scope.cancel = function() {
+		$uibModalInstance.dismiss('cancel');
+	};
 });
 
 app.controller("userDetailsController", function($scope, $routeParams,
 		UserService) {
 	var id = $routeParams.id;
-	UserService.getUser(id).success(function(response) {
-		$scope.user = response;
+	var promise = UserService.getUser(id);
+	promise.then(function(data) {
+		$scope.user = data.data;
 	});
+
 });

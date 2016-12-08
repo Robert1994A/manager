@@ -8,9 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import ro.inf.ucv.admitere.entity.ContractPage;
-
-@Controller
+import ro.inf.ucv.admitere.entity.Contract;@Controller
 @EnableWebMvc
 public class TemplatesController extends BaseController {
 
@@ -21,7 +19,7 @@ public class TemplatesController extends BaseController {
 
 	@RequestMapping(value = "/templates/users")
 	public String getUsersTemplatePage() {
-		
+
 		return "/templates/users";
 	}
 
@@ -46,22 +44,27 @@ public class TemplatesController extends BaseController {
 	}
 
 	@RequestMapping(value = "/templates/contracts")
-	public String getContractstTemplatePage(Model model) {
+	public String getContractsTemplatePage(Model model) {
 
 		if (contractPageService.count() == 0) {
 			for (int i = 0; i < 100; i++) {
-				ContractPage contractPage = new ContractPage();
+				Contract contractPage = new Contract();
 				StringBuilder pageContent = new StringBuilder(UUID.randomUUID().toString());
-				contractPage.setPage(pageContent);
+				contractPage.setContent(pageContent);
 				this.contractPageService.save(contractPage);
 			}
 		}
-		List<ContractPage> contracts = this.contractPageService.findAll();
+		List<Contract> contracts = this.contractPageService.findAll();
 		if (contracts.size() > 0) {
 			model.addAttribute("contracts", contracts);
 		} else {
 
 		}
 		return "/templates/contracts";
+	}
+
+	@RequestMapping(value = "/templates/contract")
+	public String getContractTemplatePage(Model model) {
+		return "/templates/contract";
 	}
 }

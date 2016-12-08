@@ -5,7 +5,10 @@
     <persistence-unit name="ucv">
         <class>ro.inf.ucv.admitere.entity.User</class>
         <class>ro.inf.ucv.admitere.entity.Role</class>
-        <class>ro.inf.ucv.admitere.entity.Departament</class>
-        <class>ro.inf.ucv.admitere.entity.ContractPage</class>
+        <class>ro.inf.ucv.admitere.entity.Contract</class>
+        <class>ro.inf.ucv.admitere.entity.Department</class>
+        <class>ro.inf.ucv.admitere.entity.Token</class>
+        <class>ro.inf.ucv.admitere.entity.EnrolledStudent</class>
+        <class>ro.inf.ucv.admitere.entity.EnrolledStudentPersonalFile</class>
     </persistence-unit>
 </persistence>

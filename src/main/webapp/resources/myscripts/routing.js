@@ -1,4 +1,4 @@
-var app = angular.module("HomeApp", [ "ngRoute", "infinite-scroll" ]);
+var app = angular.module("HomeApp", [ "ngRoute", "infinite-scroll", "ngAnimate", "ui.bootstrap", "ck" ]);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.when("/home", {
@@ -18,10 +18,13 @@ app.config(function($routeProvider, $locationProvider) {
 		controller : "formsController"
 	}).when("/addContract", {
 		templateUrl : "templates/addContract.html",
-		controller : "ContractPageController"
+		controller : "addContract"
 	}).when("/contracts", {
 		templateUrl : "templates/contracts.html",
+	}).when("/contract", {
+		templateUrl : "templates/contract.html",
 	}).otherwise({
 		redirectTo : "/home"
 	})
 });
+

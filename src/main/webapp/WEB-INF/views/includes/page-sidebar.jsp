@@ -35,8 +35,13 @@
 								<li id="homePage"><a href="#/home"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
 								
 								<!-- User -->
-								<li class="navigation-header"><span>User</span> <i class="icon-menu" title="Forms"></i></li>
+								<li class="navigation-header"><span>User</span> <i class="icon-menu"></i></li>
 								<li><a href="#/users"><i class="icon-home4"></i> <span>Users</span></a></li>
+								<!-- /user -->
+								
+								<!-- User -->
+								<li class="navigation-header"><span>Future Students</span> <i class="icon-menu"></i></li>
+								<li><a href="#/enrolledStudents"><i class="icon-home4"></i> <span>Enroled Students</span></a></li>
 								<!-- /user -->
 								
 								<!-- Contract -->

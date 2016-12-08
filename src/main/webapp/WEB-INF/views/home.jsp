@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +15,7 @@
 	src="./resources/assets/js/core/libraries/jquery.min.js"></script>
 <script src="./resources/myscripts/angular/angular.js"></script>
 
+<script src="./resources/myscripts/angular/angular_module.js"></script>
 <script src="./resources/myscripts/angular/ng_infinite_scroll.js"></script>
 <script src="./resources/myscripts/angular/angular-route.js"></script>
 
@@ -51,8 +53,6 @@
 <script type="text/javascript"
 	src="./resources/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
 <script type="text/javascript"
-	src="./resources/assets/js/plugins/forms/styling/switchery.min.js"></script>
-<script type="text/javascript"
 	src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
 <script type="text/javascript"
 	src="./resources/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
@@ -64,15 +64,17 @@
 	src="./resources/assets/js/plugins/ui/nicescroll.min.js"></script>
 <!-- /theme JS files -->
 
-<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/pages/layout_fixed_custom.js"></script>
-<!-- /form validation -->
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/forms/validation/validate.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/pages/form_validation.js"></script>
+<script type="text/javascript" src="./resources/ckeditor/ckeditor.js"></script>
 
+
+<!-- Theme JS files -->
+	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/switchery.min.js"></script>
+	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/switch.min.js"></script>
+
+	<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="./resources/assets/js/pages/form_checkboxes_radios.js"></script>
+	<!-- /theme JS files -->
 
 </head>
 
@@ -123,7 +125,8 @@
 
 	</div>
 	<!-- /page container -->
-
+	<script src="./resources/myscripts/angular/ui-bootstrap-tpls-2.0.1.js"></script>
+	<script src="./resources/myscripts/angular/angular-animate.js"></script>
 	<script src="./resources/myscripts/routing.js"></script>
 	<script src="./resources/myscripts/services/UserService.js"></script>
 	<script src="./resources/myscripts/controllers/UserController.js"></script>
@@ -133,7 +136,7 @@
 	<script src="./resources/myscripts/services/ContractPageService.js"></script>
 	<script
 		src="./resources/myscripts/controllers/ContractPageController.js"></script>
-
+	<!-- 
 	<script type="text/javascript">
 		$("#navbar li").click(function(e) {
 			$("li").removeClass("active");
@@ -144,6 +147,6 @@
 			$("#homePage").addClass("active");
 		});
 	</script>
-
+ -->
 </body>
 </html>

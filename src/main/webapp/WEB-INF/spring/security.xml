@@ -9,31 +9,35 @@
 		pre-post-annotations="enabled" secured-annotations="enabled" />
 
 	<security:http auto-config="true">
-
 		<security:form-login login-page="/login"
-			password-parameter="password" username-parameter="username"
-			login-processing-url="/login_spring_security" default-target-url="/articles" />
+			authentication-failure-url="/login?error=true" password-parameter="password"
+			username-parameter="username" default-target-url="/#home"
+			login-processing-url="/login_spring_security" />
+		<security:intercept-url pattern="/templates/**" access="isFullyAuthenticated()"/>
 		<security:logout logout-url="/logout"
-			logout-success-url="/?logout=true" />
-		<security:intercept-url pattern="/admin/*"
-			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+			logout-success-url="/login?logout=true" />
 		<security:intercept-url pattern="/login"
 			access="permitAll()" />
-			<security:csrf disabled="true"/>
+		<security:csrf disabled="true" />
 
 	</security:http>
 
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<security:password-encoder hash="bcrypt" />
-			<security:jdbc-user-service
-				data-source-ref="dbSource"
-
-				authorities-by-username-query="select user.username, role.name from user join user_role on user.id = user_role.users_id join role on user_role.roles_id = role.id where user.username = ?"
-
-				users-by-username-query="select user.username, user.password, user.enabled  from user where username = ?" />
-
+			<security:user-service>
+				<security:user name="admin0" password="admin0"
+					authorities="ROLE_USER, ROLE_ADMIN" />
+					<security:user name="user0" password="user0"
+					authorities="ROLE_USER" />
+			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
 
+	<!-- <security:authentication-manager> <security:authentication-provider> 
+		<security:password-encoder hash="bcrypt" /> <security:jdbc-user-service data-source-ref="dbSource" 
+		authorities-by-username-query="select user.username, role.name from user 
+		join user_role on user.id = user_role.users_id join role on user_role.roles_id 
+		= role.id where user.username = ?" users-by-username-query="select user.username, 
+		user.password, user.enabled from user where username = ?" /> </security:authentication-provider> 
+		</security:authentication-manager> -->
 </beans:beans>

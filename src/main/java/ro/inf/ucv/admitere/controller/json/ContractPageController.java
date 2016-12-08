@@ -1,5 +1,7 @@
 package ro.inf.ucv.admitere.controller.json;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ro.inf.ucv.admitere.entity.ContractPage;
+import ro.inf.ucv.admitere.entity.Contract;
+import ro.inf.ucv.admitere.entity.User;
+import ro.inf.ucv.admitere.exceptions.UserNotFound;
 
 @RestController
 public class ContractPageController extends BaseController {
@@ -30,8 +34,8 @@ public class ContractPageController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/json/contractPage/{id}.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ContractPage findOneJSON(@PathVariable("id") Long id) {
-		ContractPage contractPage = contractPageService.findOne(id);
+	public @ResponseBody Contract findOneJSON(@PathVariable("id") Long id) {
+		Contract contractPage = contractPageService.findOne(id);
 		if (contractPage == null) {
 			return null;
 		}
@@ -43,8 +47,8 @@ public class ContractPageController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/json/contractPage/contractsPage.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<ContractPage> findAllJSON() {
-		List<ContractPage> contractPage = contractPageService.findAll();
+	public @ResponseBody List<Contract> findAllJSON() {
+		List<Contract> contractPage = contractPageService.findAll();
 		if (contractPage == null) {
 			return null;
 		}
@@ -57,16 +61,21 @@ public class ContractPageController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/json/contractPage/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ContractPage saveContractPageJSON(@RequestBody ContractPage contractPage) {
+	public @ResponseBody Contract saveContractPageJSON(@RequestBody Contract contractPage, Principal principal) {
 		if (contractPage != null) {
-			if (contractPage.getPage().length() > 0) {
-				if (contractPageService.count() > 0) {
-					ContractPage contractPageUpdate = contractPageService.findOne((long) 1);
-					contractPageUpdate.setPage(contractPage.getPage());
-					contractPageService.save(contractPageUpdate);
-				} else {
-					contractPageService.save(contractPage);
+			if (contractPage.getContent().length() > 0) {
+				try {
+					User authenticateUser = userService.findByUsername(principal.getName());
+					if(authenticateUser != null){
+						contractPage.setUser(authenticateUser);
+						contractPage.setPublishedDate(new Date());
+						contractPageService.save(contractPage);
+					}
+				} catch (UserNotFound e) {
+					e.printStackTrace();
 				}
+				
+				
 			}
 
 		}
@@ -81,7 +90,7 @@ public class ContractPageController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/json/contractPage/contractsPagePaginate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<ContractPage> findContractsPaginateJSON(
+	public @ResponseBody List<Contract> findContractsPaginateJSON(
 			@RequestParam(value = "pageNumber", required = true) int pageNumber,
 			@RequestParam(value = "pageSize", required = true) int pageSize,
 			@RequestParam(value = "sortBy", required = true) String sortBy) {
@@ -98,7 +107,7 @@ public class ContractPageController extends BaseController {
 			sortBy = SORT_BY;
 		}
 
-		List<ContractPage> contractPage = this.contractPageService
+		List<Contract> contractPage = this.contractPageService
 				.findAll(new PageRequest(pageNumber, pageSize, Direction.ASC, sortBy)).getContent();
 		if (contractPage == null) {
 			return null;

@@ -8,7 +8,7 @@
 				<legend class="text-bold">Add contract</legend>
 
 				<!-- Basic text input -->
-				<div class="form-group">
+				<div class="form-group" id="row_parameterName">
 					<label class="control-label col-lg-3">Basic text input <span
 						class="text-danger">*</span></label>
 					<div class="col-lg-8">
@@ -16,7 +16,7 @@
 							placeholder="Text input validation">
 					</div>
 					<div class="col-lg-1">
-						<input type="button" class="form-control btn-danger" value="X">
+						<input type="button" ng-click='deleteParameter("parameterName")' class="form-control btn-danger" value="X">
 					</div>
 				</div>
 				<!-- /basic text input -->

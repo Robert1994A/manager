@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import ro.inf.ucv.admitere.entity.ContractPage;
+import ro.inf.ucv.admitere.entity.Contract;
 import ro.inf.ucv.admitere.repository.ContractPageRepository;
 
 @Service
@@ -19,15 +19,15 @@ public class ContractPageService {
 	@Autowired
 	private ContractPageRepository contractPageRepository;
 
-	public ContractPage findOne(Long id) {
+	public Contract findOne(Long id) {
 		return contractPageRepository.findOne(id);
 	}
 
-	public void save(ContractPage contractPage) {
+	public void save(Contract contractPage) {
 		contractPageRepository.save(contractPage);
 	}
 
-	public List<ContractPage> findAll() {
+	public List<Contract> findAll() {
 		return contractPageRepository.findAll();
 	}
 
@@ -35,11 +35,11 @@ public class ContractPageService {
 		return contractPageRepository.count();
 	}
 
-	public void updateContractPage(ContractPage contractPage) {
+	public void updateContractPage(Contract contractPage) {
 		contractPageRepository.save(contractPage);
 	}
 
-	public Page<ContractPage> findAll(Pageable pageable) {
+	public Page<Contract> findAll(Pageable pageable) {
 		return contractPageRepository.findAll(pageable);
 	}
 }

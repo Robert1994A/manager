@@ -6,70 +6,55 @@
 		}, 300);
 	});
 </script>
-
 <div class="panel panel-flat">
 	<div class="panel-heading">
 		<h5 class="panel-title">Search in users</h5>
-		<div class="heading-elements">
-			<ul class="icons-list">
-				<li><a data-action="collapse"></a></li>
-				<li><a data-action="close"></a></li>
-			</ul>
-		</div>
-		<a class="heading-elements-toggle"><i class="icon-more"></i></a>
 	</div>
-
 	<div class="panel-body">
-		<form action="#" class="main-search">
+		<form class="main-search">
 			<div class="input-group content-group">
 				<div class="has-feedback has-feedback-left">
 					<input type="text" class="form-control input-xlg"
-						value="" placeholder="Type a user name">
+						ng-model="searchUserValue" placeholder="Type a user name">
 					<div class="form-control-feedback">
 						<i class="icon-search4 text-muted text-size-base"></i>
 					</div>
 				</div>
-
 				<div class="input-group-btn">
-					<button type="submit" class="btn btn-primary btn-xlg">Search</button>
+					<button type="button" ng-click="searchUser()"
+						class="btn btn-primary btn-xlg">Search</button>
 				</div>
 			</div>
+			<div class="form-group">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-xs-4">
+							<label>Per Page: </label>
+							<select name="perPage" ng-model="perPage" class="form-control">
+								<option value="5">5<option>
+								<option value="10">10</option>
+								<option value="20">25</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+							</select>
+						</div>
 
-			<div class="row search-option-buttons">
-				<div class="col-sm-6">
-					<ul class="list-inline list-inline-condensed no-margin-bottom">
-						<li class="dropdown"><a href="#"
-							class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-								<i class="icon-stack2 position-left"></i> All categories <span
-								class="caret"></span>
-						</a>
+						<div class="col-xs-4">
+							<label>Sort by: </label>
+							<select name="sortBy" ng-model="sortBy" class="form-control">
+								<option value="id">ID</option>
+								<option value="username">Username</option>
+							</select>
+						</div>
 
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="icon-question7"></i> Getting
-										started</a></li>
-								<li><a href="#"><i class="icon-accessibility"></i>
-										Registration</a></li>
-								<li><a href="#"><i class="icon-reading"></i> General
-										info</a></li>
-								<li><a href="#"><i class="icon-gear"></i> Your settings</a></li>
-								<li><a href="#"><i class="icon-graduation"></i>
-										Copyrights</a></li>
-								<li class="divider"></li>
-								<li><a href="#"><i class="icon-mail-read"></i>
-										Contacting authors</a></li>
-							</ul></li>
-						<li><a href="#" class="btn btn-link"><i
-								class="icon-reload-alt position-left"></i> Refine your search</a></li>
-					</ul>
-				</div>
-
-				<div class="col-sm-6 text-right">
-					<ul class="list-inline no-margin-bottom">
-						<li><a href="#" class="btn btn-link"><i
-								class="icon-make-group position-left"></i> Browse website</a></li>
-						<li><a href="#" class="btn btn-link"><i
-								class="icon-menu7 position-left"></i> Advanced search</a></li>
-					</ul>
+						<div class="col-xs-4">
+							<label>Sort direction: </label>
+							<select name="sortDirection" ng-model="sortDirection" class="form-control">
+								<option value="ASC">ASC</option>
+								<option value="DESC">DESC</option>
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -85,6 +70,7 @@
 					<th>Username</th>
 					<th>Email</th>
 					<th>Roles</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody infinite-scroll='reddit.nextPage()'
@@ -98,7 +84,16 @@
 							<li>{{role.id}} : <b>{{role.name}}</b></li>
 						</ul>
 					</td>
-				</tr>
+					<td><div class="btn-group">
+							<button type="button" class="btn btn-default"
+								ng-click="viewUserDetails(item.id)">User details</button>
+							<button type="button" class="btn btn-danger">
+								<i class="icon-make-group position-left"></i>
+							</button>
+							<button type="button" class="btn btn-info">
+								<i class="icon-make-group position-left"></i>
+							</button>
+						</div></td>
 				</tr>
 
 			</tbody>
