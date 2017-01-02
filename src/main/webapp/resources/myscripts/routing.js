@@ -23,8 +23,10 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl : "templates/contracts.html",
 	}).when("/contract", {
 		templateUrl : "templates/contract.html",
+	}).when("/profile", {
+		templateUrl : "templates/profile.html",
+		controller : "profileController"
 	}).otherwise({
 		redirectTo : "/home"
 	})
 });
-

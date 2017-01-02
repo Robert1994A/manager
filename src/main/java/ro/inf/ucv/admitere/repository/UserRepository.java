@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import ro.inf.ucv.admitere.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, String> {
 
 	User findByUsername(String name);
 
@@ -17,5 +17,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Page<User> findByUsernameIgnoreCaseContaining(String userSearchValue, Pageable pageRequest);
 
 	Long countFindByUsernameIgnoreCaseContaining(String userSearchValue);
+
+	User findByRegisterToken(String registerToken);
+
+	Object findByEmail(String email);
+
+	User findByUsernameOrEmail(String username, String email);
+
+	User findByRecoverPaswordToken(String recoverToken);
 
 }

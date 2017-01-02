@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ro.inf.ucv.admitere.entity.User;
-import ro.inf.ucv.admitere.exceptions.UserAlreadyExist;
 import ro.inf.ucv.admitere.exceptions.UserNotFound;
 import ro.inf.ucv.admitere.repository.UserRepository;
 
@@ -24,9 +23,6 @@ public class UserService {
 	UserRepository userRepository;
 
 	public void save(User user) {
-		if (userRepository.countByUsername(user.getUsername()) != 0) {
-			throw new UserAlreadyExist("User with username " + user.getUsername() + " already exist!");
-		}
 		userRepository.save(user);
 	}
 
@@ -38,7 +34,7 @@ public class UserService {
 		return allUsers;
 	}
 
-	public User findOne(Long id) throws UserNotFound {
+	public User findOne(String id) throws UserNotFound {
 		if (id == null) {
 			throw new UserNotFound("User with id " + id + " was not found!");
 		}
@@ -72,5 +68,21 @@ public class UserService {
 
 	public Long countUserWithSearch(String userSearchValue) {
 		return userRepository.countFindByUsernameIgnoreCaseContaining(userSearchValue);
+	}
+
+	public User findByRegisterToken(String registerToken) {
+		return userRepository.findByRegisterToken(registerToken);
+	}
+
+	public void deleteById(String id) {
+		userRepository.delete(id);
+	}
+
+	public User findByUsernameOrEmail(String username, String email) {
+		return userRepository.findByUsernameOrEmail(username, email);
+	}
+
+	public User findByRecoverPaswordToken(String recoverToken) {
+		return userRepository.findByRecoverPaswordToken(recoverToken);
 	}
 }

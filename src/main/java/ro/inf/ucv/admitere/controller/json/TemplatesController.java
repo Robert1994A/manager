@@ -67,4 +67,9 @@ public class TemplatesController extends BaseController {
 	public String getContractTemplatePage(Model model) {
 		return "/templates/contract";
 	}
+	
+    @RequestMapping(value = "/templates/profile")
+    public String getProfileTemplatePage() {
+        return "/templates/profile";
+    }
 }

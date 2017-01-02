@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -22,16 +24,23 @@ public class Contract implements Serializable {
 	@GeneratedValue
 	private Long id;
 
+	@NotNull
+	@Size(min=5, max=255)
 	private String name;
 
+	@NotNull
 	private boolean published;
 
+	@NotNull
 	private Date publishedDate;
 
+	@NotNull
+	@Size(min=5, max=255)
 	private String description;
 
+	@NotNull
 	private StringBuilder content;
-	
+
 	@OneToOne
 	private User user;
 

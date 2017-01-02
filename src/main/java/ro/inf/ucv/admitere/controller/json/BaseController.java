@@ -1,14 +1,15 @@
 package ro.inf.ucv.admitere.controller.json;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import ro.inf.ucv.admitere.entity.User;
 import ro.inf.ucv.admitere.service.ContractPageService;
-import ro.inf.ucv.admitere.service.DepartmentService;
+import ro.inf.ucv.admitere.service.Mailer;
 import ro.inf.ucv.admitere.service.RoleService;
-import ro.inf.ucv.admitere.service.TokenService;
 import ro.inf.ucv.admitere.service.UserService;
+import ro.inf.ucv.admitere.utils.Generator;
 
 @Controller
 public class BaseController {
@@ -23,11 +24,12 @@ public class BaseController {
 	protected UserService userService;
 
 	@Autowired
-	protected TokenService tokenService;
-	
-	@Autowired 
-	protected DepartmentService departmentService;
+	protected Mailer mailer;
 
-	User user;
+	User user = null;
+
+	Generator generator = new Generator();
+	
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 }

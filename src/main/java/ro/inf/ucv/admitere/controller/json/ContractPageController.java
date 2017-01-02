@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import ro.inf.ucv.admitere.entity.User;
 import ro.inf.ucv.admitere.exceptions.UserNotFound;
 
 @RestController
+@Validated
 public class ContractPageController extends BaseController {
 
 	private static final int PER_PAGE = 10;
@@ -65,8 +67,10 @@ public class ContractPageController extends BaseController {
 		if (contractPage != null) {
 			if (contractPage.getContent().length() > 0) {
 				try {
-					User authenticateUser = userService.findByUsername(principal.getName());
-					if(authenticateUser != null){
+					// User authenticateUser =
+					// userService.findByUsername(principal.getName());
+					User authenticateUser = userService.findAll().get(1);
+					if (authenticateUser != null) {
 						contractPage.setUser(authenticateUser);
 						contractPage.setPublishedDate(new Date());
 						contractPageService.save(contractPage);
@@ -74,8 +78,7 @@ public class ContractPageController extends BaseController {
 				} catch (UserNotFound e) {
 					e.printStackTrace();
 				}
-				
-				
+
 			}
 
 		}

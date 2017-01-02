@@ -1,12 +1,13 @@
 package ro.inf.ucv.admitere.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -14,11 +15,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import ro.inf.ucv.admitere.annotation.UniqueEmail;
 import ro.inf.ucv.admitere.annotation.UniqueUsername;
 
 @Entity
@@ -30,15 +33,18 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 9093304836112847216L;
 
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 
-	@UniqueUsername(message = "This username already exist!")
+	@UniqueUsername(message = "This username already exist! Please try another one!")
 	@NotNull
 	@NotEmpty
 	private String username;
 
+	@UniqueEmail(message = "This email already exist! Please try another one!")
 	@Email
 	@NotNull
 	@NotEmpty
@@ -49,29 +55,33 @@ public class User implements Serializable {
 	@NotEmpty
 	private String password;
 
-	private boolean enabled;
-
-	@NotNull
-	@NotEmpty
 	private String registerToken;
 
-	@NotNull
-	@NotEmpty
 	private String recoverPaswordToken;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable
-	@NotNull
-	private List<Role> roles;
+	private Date creationDate;
+
+	private Date expiredDate;
+
+	private boolean expired;
+
+	private boolean enabled;
 
 	@OneToOne
 	private Contract contract;
 
-	public Long getId() {
+	@OneToOne
+	private UserPersonalData userPersonalData;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable
+	private List<Role> roles;
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -137,6 +147,38 @@ public class User implements Serializable {
 
 	public void setContract(Contract contract) {
 		this.contract = contract;
+	}
+
+	public UserPersonalData getUserPersonalData() {
+		return userPersonalData;
+	}
+
+	public void setUserPersonalData(UserPersonalData userPersonalData) {
+		this.userPersonalData = userPersonalData;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public boolean isExpired() {
+		return expired;
+	}
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
+
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
 	}
 
 }

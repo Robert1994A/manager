@@ -6,9 +6,27 @@
         <class>ro.inf.ucv.admitere.entity.User</class>
         <class>ro.inf.ucv.admitere.entity.Role</class>
         <class>ro.inf.ucv.admitere.entity.Contract</class>
+        <class>ro.inf.ucv.admitere.entity.UserPersonalData</class>
+        <class>ro.inf.ucv.admitere.entity.Address</class>
+        <class>ro.inf.ucv.admitere.entity.City</class>
+        <class>ro.inf.ucv.admitere.entity.Country</class>
+        <class>ro.inf.ucv.admitere.entity.State</class>
+        <class>ro.inf.ucv.admitere.entity.IdentityCard</class>
+        <class>ro.inf.ucv.admitere.entity.University</class>
+        <class>ro.inf.ucv.admitere.entity.Faculty</class>
         <class>ro.inf.ucv.admitere.entity.Department</class>
-        <class>ro.inf.ucv.admitere.entity.Token</class>
-        <class>ro.inf.ucv.admitere.entity.EnrolledStudent</class>
-        <class>ro.inf.ucv.admitere.entity.EnrolledStudentPersonalFile</class>
+        <class>ro.inf.ucv.admitere.entity.AdmissionSession</class>
+        <class>ro.inf.ucv.admitere.entity.File</class>
+        <class>ro.inf.ucv.admitere.entity.PreviousHighSchool</class>
+        <class>ro.inf.ucv.admitere.entity.HighSchoolDiploma</class>
+        <class>ro.inf.ucv.admitere.entity.County</class>
+        <class>ro.inf.ucv.admitere.entity.PreviousFaculty</class>
+        <class>ro.inf.ucv.admitere.entity.PreviousFacultyDiploma</class>
+        <class>ro.inf.ucv.admitere.entity.LegalParentFather</class>
+        <class>ro.inf.ucv.admitere.entity.LegalParentMother</class>
+        <class>ro.inf.ucv.admitere.entity.Specialization</class>
+        <properties>
+        	<property name="eclipselink.profiler" value="PerformanceProfiler"/>
+        </properties>
     </persistence-unit>
 </persistence>

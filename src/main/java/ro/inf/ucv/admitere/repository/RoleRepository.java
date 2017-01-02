@@ -8,6 +8,8 @@ import ro.inf.ucv.admitere.entity.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    int countByName(String name);
+	int countByName(String name);
+
+	Role findByName(String name);
 
 }

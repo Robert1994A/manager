@@ -68,13 +68,8 @@
 
 
 <!-- Theme JS files -->
-	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/switchery.min.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/plugins/forms/styling/switch.min.js"></script>
-
-	<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
-	<script type="text/javascript" src="./resources/assets/js/pages/form_checkboxes_radios.js"></script>
-	<!-- /theme JS files -->
+<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
+<!-- /theme JS files -->
 
 </head>
 
@@ -136,6 +131,8 @@
 	<script src="./resources/myscripts/services/ContractPageService.js"></script>
 	<script
 		src="./resources/myscripts/controllers/ContractPageController.js"></script>
+	<script src="./resources/myscripts/services/ProfileService.js"></script>
+	<script src="./resources/myscripts/controllers/ProfileController.js"></script>
 	<!-- 
 	<script type="text/javascript">
 		$("#navbar li").click(function(e) {

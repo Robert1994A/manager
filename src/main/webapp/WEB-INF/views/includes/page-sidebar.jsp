@@ -34,6 +34,11 @@
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
 								<li id="homePage"><a href="#/home"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
 								
+								<!-- Profile -->
+								<li class="navigation-header"><span>Profile</span> <i class="icon-menu"></i></li>
+								<li><a href="#/profile"><i class="icon-home4"></i> <span>Profile</span></a></li>
+								<!-- /user -->
+								
 								<!-- User -->
 								<li class="navigation-header"><span>User</span> <i class="icon-menu"></i></li>
 								<li><a href="#/users"><i class="icon-home4"></i> <span>Users</span></a></li>

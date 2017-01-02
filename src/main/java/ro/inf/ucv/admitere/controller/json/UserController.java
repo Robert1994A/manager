@@ -1,7 +1,6 @@
 package ro.inf.ucv.admitere.controller.json;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,52 +15,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ro.inf.ucv.admitere.entity.User;
+import ro.inf.ucv.admitere.entity.utils.ApiError;
 import ro.inf.ucv.admitere.exceptions.UserNotFound;
-import ro.inf.ucv.admitere.json.objects.UsersCountObject;
 
 @RestController
 @SessionAttributes("userSearchValue")
 public class UserController extends BaseController {
-	private static final String JSON_USERS_PATH = "/json/users/";
 
-	@RequestMapping(value = JSON_USERS_PATH
-			+ "{id}.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody User findOneJSON(@PathVariable("id") Long id) throws UserNotFound {
-		User user = userService.findOne(id);
-		if (user == null) {
-			return null;
-		}
-		return user;
-	}
-
-	@RequestMapping(value = JSON_USERS_PATH
-			+ "countUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UsersCountObject countUsersJSON() {
-		UsersCountObject usersCountObject = new UsersCountObject();
-		usersCountObject.setCountUsers(userService.count());
-		return usersCountObject;
-	}
-
-	@RequestMapping(value = "/json/users.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<User> allUsersJSON() throws UserNotFound {
-		List<User> users = new ArrayList<User>();
-		users = userService.findAll();
-		if (users == null) {
-			return null;
-		}
-		for (User user : users) {
-			user.getRoles();
-		}
-		return users;
-	}
-
-	@RequestMapping(value = JSON_USERS_PATH
-			+ "paginate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/users/paginate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Page<User>> allUsersPaginateJSON(
 			@RequestParam(value = "pageNumber", required = true) int pageNumber,
 			@RequestParam(value = "pageSize", required = true) int pageSize,
@@ -97,5 +62,48 @@ public class UserController extends BaseController {
 		}
 
 		return new ResponseEntity<Page<User>>(users, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/users/deleteAccount/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ApiError> deleteAccountJSON(@PathVariable("id") String id) {
+		ApiError error;
+		try {
+			userService.deleteById(id);
+		} catch (Exception e) {
+			error = new ApiError(HttpStatus.BAD_REQUEST, "Error to delete this account!", new ArrayList<>());
+			return new ResponseEntity<ApiError>(error, HttpStatus.BAD_REQUEST);
+		}
+		error = new ApiError(HttpStatus.OK, "This account was deleted succesfully!", new ArrayList<>());
+		return new ResponseEntity<ApiError>(error, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/users/disableAccount/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ApiError> disableAccountJSON(@PathVariable("id") String id) {
+		ApiError error;
+		try {
+			user = userService.findOne(id);
+			user.setEnabled(false);
+			userService.save(user);
+		} catch (Exception e) {
+			error = new ApiError(HttpStatus.BAD_REQUEST, e.getMessage(), new ArrayList<>());
+			return new ResponseEntity<ApiError>(error, HttpStatus.BAD_REQUEST);
+		}
+		error = new ApiError(HttpStatus.OK, "This account was disabled succesfully!", new ArrayList<>());
+		return new ResponseEntity<ApiError>(error, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/users/enableAccount/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ApiError> enableAccountJSON(@PathVariable("id") String id) {
+		ApiError error;
+		try {
+			user = userService.findOne(id);
+			user.setEnabled(true);
+			userService.save(user);
+		} catch (Exception e) {
+			error = new ApiError(HttpStatus.BAD_REQUEST, e.getMessage(), new ArrayList<>());
+			return new ResponseEntity<ApiError>(error, HttpStatus.BAD_REQUEST);
+		}
+		error = new ApiError(HttpStatus.OK, "This account was enabled succesfully!", new ArrayList<>());
+		return new ResponseEntity<ApiError>(error, HttpStatus.OK);
 	}
 }

@@ -37,22 +37,46 @@ app.controller("usersController", function($scope, UserService, Reddit,
 
 });
 
-app.controller('singleUserModal', function($scope, $uibModalInstance) {
-	$scope.ok = function() {
-		$uibModalInstance.close();
+app.controller('singleUserModal', function($scope, $uibModalInstance,
+		UserService) {
+	$scope.deleteAccount = function(id) {
+		var promise = UserService.deleteAccount(id);
+		promise.then(function(data) {
+			if (data.data.status == "OK") {
+				$scope.validResponse = data.data.message;
+			}
+			if (data.data.status == "BAD_REQUEST") {
+				$scope.invalidResponse = data.data.message;
+			}
+
+		});
+	};
+
+	$scope.disableAccount = function(id) {
+		var promise = UserService.disableAccount(id);
+		promise.then(function(data) {
+			if (data.data.status == "OK") {
+				$scope.validResponse = data.data.message;
+			}
+			if (data.data.status == "BAD_REQUEST") {
+				$scope.invalidResponse = data.data.message;
+			}
+		});
+	};
+	
+	$scope.enableAccount = function(id) {
+		var promise = UserService.enableAccount(id);
+		promise.then(function(data) {
+			if (data.data.status == "OK") {
+				$scope.validResponse = data.data.message;
+			}
+			if (data.data.status == "BAD_REQUEST") {
+				$scope.invalidResponse = data.data.message;
+			}
+		});
 	};
 
 	$scope.cancel = function() {
-		$uibModalInstance.dismiss('cancel');
+		$uibModalInstance.close();
 	};
-});
-
-app.controller("userDetailsController", function($scope, $routeParams,
-		UserService) {
-	var id = $routeParams.id;
-	var promise = UserService.getUser(id);
-	promise.then(function(data) {
-		$scope.user = data.data;
-	});
-
 });
