@@ -1,16 +1,18 @@
 package ro.inf.ucv.admitere.entity;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table
@@ -27,20 +29,24 @@ public class IdentityCard implements Serializable {
 	@Id
 	private String id;
 
+	@NotNull
+	@NotEmpty
 	private String series;
 
+	@Min(value = 1)
 	private Long number;
 
+	@NotNull
+	@NotEmpty
 	private String issuedBy;
 
-	private String releaseDate;
+	@NotNull
+	private Date releaseDate;
 
-	private String expiryDate;
+	@NotNull
+	private Date expiryDate;
 
 	private boolean validated;
-	
-	@OneToMany
-	private Set<File> files;
 
 	public String getId() {
 		return id;
@@ -74,19 +80,19 @@ public class IdentityCard implements Serializable {
 		this.issuedBy = issuedBy;
 	}
 
-	public String getReleaseDate() {
+	public Date getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(String releaseDate) {
+	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
-	public String getExpiryDate() {
+	public Date getExpiryDate() {
 		return expiryDate;
 	}
 
-	public void setExpiryDate(String expiryDate) {
+	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 

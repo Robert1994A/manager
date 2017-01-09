@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,6 +25,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ro.inf.ucv.admitere.annotation.UniqueCnp;
 import ro.inf.ucv.admitere.annotation.UniquePhoneNumber;
+import ro.inf.ucv.admitere.entity.utils.Gender;
+import ro.inf.ucv.admitere.entity.utils.MaritalStatus;
+import ro.inf.ucv.admitere.entity.utils.SocialStatus;
 
 @Entity
 @Table
@@ -35,9 +42,8 @@ public class UserPersonalData implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@NotBlank(message = "familyNameBirtCertificate must not be blank!")
+	@NotBlank(message = "familyNameBirthCertificate must not be blank!")
 	@NotNull
-	@Min(value = 2, message = "Min value length is 2")
 	private String familyNameBirtCertificate;
 
 	@NotEmpty
@@ -50,10 +56,12 @@ public class UserPersonalData implements Serializable {
 
 	@NotEmpty
 	@NotNull
+	@Size(min = 1, max = 1)
 	private String initialMotherForename;
 
 	@NotEmpty
 	@NotNull
+	@Size(min = 1, max = 1)
 	private String initialFatherForename;
 
 	@UniqueCnp(message = "This CNP already exist!")
@@ -62,22 +70,37 @@ public class UserPersonalData implements Serializable {
 	@Size(max = 13, min = 13)
 	private String cnp;
 
+	@Min(value = 1)
+	@Max(value = 31)
 	private int birthDay;
 
+	@Min(value = 1)
+	@Max(value = 12)
 	private int birthMonth;
 
+	@Min(value = 1900)
+	@Max(value = 2100)
 	private int birthYear;
 
-	private String sexType;
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 
-	private String maritalStatus;
+	@Enumerated(EnumType.STRING)
+	private MaritalStatus maritalStatus;
 
-	private String socialStatus;
+	@Enumerated(EnumType.STRING)
+	private SocialStatus socialStatus;
 
+	@NotNull
+	@NotEmpty
 	private String citizenship;
 
+	@NotNull
+	@NotEmpty
 	private String ethnicity;
 
+	@NotNull
+	@NotEmpty
 	private String religion;
 
 	@UniquePhoneNumber(message = "This phoneNumber already exist!")
@@ -87,32 +110,59 @@ public class UserPersonalData implements Serializable {
 	@JsonIgnore
 	private Address address;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<IdentityCard> identityCard;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<PreviousHighSchool> prevoiusHighschool;
+	private Set<PreviousHighSchool> previousHighschool;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<PreviousFaculty> previousFaculty;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private LegalParentFather legalParentFather;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private LegalParentMother legalParentMother;
 
-	public Set<PreviousHighSchool> getPrevoiusHighschool() {
-		return prevoiusHighschool;
+	@OneToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<PersonalFile> personalFiles;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JsonIgnore
+	private List<File> files;
+
+	@OneToOne
+	private User user;
+
+	public Set<PreviousHighSchool> getPreviousHighschool() {
+		return previousHighschool;
 	}
 
-	public void setPrevoiusHighschool(Set<PreviousHighSchool> prevoiusHighschool) {
-		this.prevoiusHighschool = prevoiusHighschool;
+	public void setPreviousHighschool(Set<PreviousHighSchool> previousHighschool) {
+		this.previousHighschool = previousHighschool;
+	}
+
+	public LegalParentFather getLegalParentFather() {
+		return legalParentFather;
+	}
+
+	public void setLegalParentFather(LegalParentFather legalParentFather) {
+		this.legalParentFather = legalParentFather;
+	}
+
+	public LegalParentMother getLegalParentMother() {
+		return legalParentMother;
+	}
+
+	public void setLegalParentMother(LegalParentMother legalParentMother) {
+		this.legalParentMother = legalParentMother;
 	}
 
 	public Set<PreviousFaculty> getPreviousFaculty() {
@@ -129,14 +179,6 @@ public class UserPersonalData implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getFamilyNameBirtCertificate() {
-		return familyNameBirtCertificate;
-	}
-
-	public void setFamilyNameBirtCertificate(String familyNameBirtCertificate) {
-		this.familyNameBirtCertificate = familyNameBirtCertificate;
 	}
 
 	public String getFamilyNameActual() {
@@ -203,27 +245,27 @@ public class UserPersonalData implements Serializable {
 		this.birthYear = birthYear;
 	}
 
-	public String getSexType() {
-		return sexType;
+	public Gender getGender() {
+		return gender;
 	}
 
-	public void setSexType(String sexType) {
-		this.sexType = sexType;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
-	public String getMaritalStatus() {
+	public MaritalStatus getMaritalStatus() {
 		return maritalStatus;
 	}
 
-	public void setMaritalStatus(String maritalStatus) {
+	public void setMaritalStatus(MaritalStatus maritalStatus) {
 		this.maritalStatus = maritalStatus;
 	}
 
-	public String getSocialStatus() {
+	public SocialStatus getSocialStatus() {
 		return socialStatus;
 	}
 
-	public void setSocialStatus(String socialStatus) {
+	public void setSocialStatus(SocialStatus socialStatus) {
 		this.socialStatus = socialStatus;
 	}
 
@@ -273,6 +315,38 @@ public class UserPersonalData implements Serializable {
 
 	public void setIdentityCard(List<IdentityCard> identityCard) {
 		this.identityCard = identityCard;
+	}
+
+	public List<PersonalFile> getPersonalFiles() {
+		return personalFiles;
+	}
+
+	public void setPersonalFiles(List<PersonalFile> personalFiles) {
+		this.personalFiles = personalFiles;
+	}
+
+	public List<File> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<File> files) {
+		this.files = files;
+	}
+
+	public String getFamilyNameBirtCertificate() {
+		return familyNameBirtCertificate;
+	}
+
+	public void setFamilyNameBirtCertificate(String familyNameBirtCertificate) {
+		this.familyNameBirtCertificate = familyNameBirtCertificate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

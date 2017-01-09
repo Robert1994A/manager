@@ -82,6 +82,10 @@ public class UserController extends BaseController {
 		ApiError error;
 		try {
 			user = userService.findOne(id);
+			if (!user.isEnabled()) {
+				error = new ApiError(HttpStatus.BAD_REQUEST, "This user is already disabled!", new ArrayList<>());
+				return new ResponseEntity<ApiError>(error, HttpStatus.BAD_REQUEST);
+			}
 			user.setEnabled(false);
 			userService.save(user);
 		} catch (Exception e) {
@@ -97,6 +101,10 @@ public class UserController extends BaseController {
 		ApiError error;
 		try {
 			user = userService.findOne(id);
+			if (user.isEnabled()) {
+				error = new ApiError(HttpStatus.BAD_REQUEST, "This user is already enabled!", new ArrayList<>());
+				return new ResponseEntity<ApiError>(error, HttpStatus.BAD_REQUEST);
+			}
 			user.setEnabled(true);
 			userService.save(user);
 		} catch (Exception e) {

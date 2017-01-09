@@ -11,23 +11,6 @@
 		<p class="content-group-sm text-muted">In this panel is details
 			about this user.</p>
 
-		<span ng-if="invalidResponse">
-			<div class="alert alert-danger alert-styled-left alert-bordered">
-				<button type="button" class="close" data-dismiss="alert">
-					<span>×</span><span class="sr-only">Close</span>
-				</button>
-				<span class="text-semibold">Oh snap!</span> {{invalidResponse}}
-			</div>
-		</span> <span ng-if="validResponse">
-			<div
-				class="alert alert-success alert-styled-left alert-arrow-left alert-bordered">
-				<button type="button" class="close" data-dismiss="alert">
-					<span>×</span><span class="sr-only">Close</span>
-				</button>
-				<span class="text-semibold">Well done!</span>{{validResponse}}
-			</div>
-		</span>
-
 		<div class="well">
 			<dl class="dl-horizontal">
 				<dt>ID</dt>

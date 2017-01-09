@@ -1,7 +1,15 @@
 package ro.inf.ucv.admitere.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Entity implementation class for Entity: Specialization
@@ -11,21 +19,23 @@ import javax.persistence.*;
 @Table
 public class Specialization implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
+	@NotNull
+	@NotEmpty
 	private String name;
-	
-	private int price;
-	
+
+	@Min(value = 1)
+	private float price;
+
 	private boolean taxa;
-	
+
 	private boolean budget;
-	
+
 	private String description;
 
 	public Long getId() {
@@ -44,11 +54,11 @@ public class Specialization implements Serializable {
 		this.name = name;
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -75,6 +85,5 @@ public class Specialization implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
 }

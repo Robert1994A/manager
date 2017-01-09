@@ -1,12 +1,17 @@
 package ro.inf.ucv.admitere.controller.json;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,11 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ro.inf.ucv.admitere.entity.Contract;
 import ro.inf.ucv.admitere.entity.User;
+import ro.inf.ucv.admitere.entity.utils.ApiError;
 import ro.inf.ucv.admitere.exceptions.UserNotFound;
 
 @RestController
 @Validated
-public class ContractPageController extends BaseController {
+public class ContractController extends BaseController {
 
 	private static final int PER_PAGE = 10;
 
@@ -63,7 +69,8 @@ public class ContractPageController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/json/contractPage/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Contract saveContractPageJSON(@RequestBody Contract contractPage, Principal principal) {
+	public @ResponseBody ResponseEntity<ApiError> saveContractPageJSON(@RequestBody @Valid Contract contractPage,
+			Principal principal) {
 		if (contractPage != null) {
 			if (contractPage.getContent().length() > 0) {
 				try {
@@ -75,14 +82,15 @@ public class ContractPageController extends BaseController {
 						contractPage.setPublishedDate(new Date());
 						contractPageService.save(contractPage);
 					}
-				} catch (UserNotFound e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
 			}
 
 		}
-		return contractPage;
+		return new ResponseEntity<ApiError>(new ApiError(HttpStatus.OK, "Succes", new ArrayList<String>()),
+				HttpStatus.OK);
 	}
 
 	/**

@@ -36,13 +36,25 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
 			final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
 		final List<String> errors = new ArrayList<String>();
+		String errorLocation = null;
+		String errorMessage = null;
 		for (final FieldError error : ex.getBindingResult().getFieldErrors()) {
 			errors.add(error.getField() + ": " + error.getDefaultMessage());
+			errorLocation = error.getField();
+			errorMessage = error.getDefaultMessage();
 		}
 		for (final ObjectError error : ex.getBindingResult().getGlobalErrors()) {
 			errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
 		}
-		final ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+
+		ApiError apiError = null;
+		if (errorLocation != null && errorMessage != null) {
+			apiError = new ApiError(HttpStatus.BAD_REQUEST,
+					"At field " + errorLocation + " is the following error: " + errorMessage, errors);
+		} else {
+			apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+		}
+
 		return handleExceptionInternal(ex, apiError, headers, apiError.getStatus(), request);
 	}
 
@@ -107,7 +119,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleNoHandlerFoundException(final NoHandlerFoundException ex,
 			final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
 		final String error = "No handler found for " + ex.getHttpMethod() + " " + ex.getRequestURL();
-
 		final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), error);
 		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
@@ -118,6 +129,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
 			final HttpRequestMethodNotSupportedException ex, final HttpHeaders headers, final HttpStatus status,
 			final WebRequest request) {
+
 		final StringBuilder builder = new StringBuilder();
 		builder.append(ex.getMethod());
 		builder.append(" method is not supported for this request. Supported methods are ");
@@ -148,8 +160,8 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<Object> handleAll(final Exception ex, final WebRequest request) {
 		//
-		final ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(),
-				"error occurred");
+		final ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR,
+				ex.getLocalizedMessage() == null ? ex.getMessage() : ex.getLocalizedMessage(), "error occurred");
 		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
 }

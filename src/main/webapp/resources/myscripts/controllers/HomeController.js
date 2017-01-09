@@ -1,3 +1,6 @@
-app.controller("homeController", function ($scope) {
-    $scope.message = "HOME PAGE";
+app.controller("homeController", function($scope, ResponseUtilService) {
+
+	
+
+	$scope.message = "HOME PAGE";
 });

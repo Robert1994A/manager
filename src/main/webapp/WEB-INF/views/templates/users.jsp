@@ -29,9 +29,10 @@
 				<div class="col-lg-12">
 					<div class="row">
 						<div class="col-xs-4">
-							<label>Per Page: </label>
-							<select name="perPage" ng-model="perPage" class="form-control">
-								<option value="5">5<option>
+							<label>Per Page: </label> <select name="perPage"
+								ng-model="perPage" class="form-control">
+								<option value="5">5
+								<option>
 								<option value="10">10</option>
 								<option value="20">25</option>
 								<option value="50">50</option>
@@ -40,16 +41,16 @@
 						</div>
 
 						<div class="col-xs-4">
-							<label>Sort by: </label>
-							<select name="sortBy" ng-model="sortBy" class="form-control">
+							<label>Sort by: </label> <select name="sortBy" ng-model="sortBy"
+								class="form-control">
 								<option value="id">ID</option>
 								<option value="username">Username</option>
 							</select>
 						</div>
 
 						<div class="col-xs-4">
-							<label>Sort direction: </label>
-							<select name="sortDirection" ng-model="sortDirection" class="form-control">
+							<label>Sort direction: </label> <select name="sortDirection"
+								ng-model="sortDirection" class="form-control">
 								<option value="ASC">ASC</option>
 								<option value="DESC">DESC</option>
 							</select>
@@ -66,8 +67,10 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<!-- 
 					<th>ID</th>
 					<th>Username</th>
+					 -->
 					<th>Email</th>
 					<th>Roles</th>
 					<th>Action</th>
@@ -76,8 +79,9 @@
 			<tbody infinite-scroll='reddit.nextPage()'
 				infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1'>
 				<tr ng-repeat='item in reddit.items'>
+					<!-- 
 					<td>{{item.id}}</td>
-					<td>{{item.username}}</td>
+					<td>{{item.username}}</td> -->
 					<td>{{item.email}}</td>
 					<td>
 						<ul ng-repeat="role in item.roles">

@@ -10,14 +10,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ro.inf.ucv.admitere.entity.Contract;
-import ro.inf.ucv.admitere.repository.ContractPageRepository;
+import ro.inf.ucv.admitere.repository.ContractRepository;
 
 @Service
 @Transactional
-public class ContractPageService {
+public class ContractService {
 
 	@Autowired
-	private ContractPageRepository contractPageRepository;
+	private ContractRepository contractPageRepository;
 
 	public Contract findOne(Long id) {
 		return contractPageRepository.findOne(id);

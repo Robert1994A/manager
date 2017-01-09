@@ -67,10 +67,12 @@ public class User implements Serializable {
 
 	private boolean enabled;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Contract contract;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
+	@JsonIgnore
 	private UserPersonalData userPersonalData;
 
 	@ManyToMany(fetch = FetchType.EAGER)

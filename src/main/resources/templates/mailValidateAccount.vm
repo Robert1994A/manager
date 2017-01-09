@@ -1,10 +1,8 @@
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	</head>
 
-	<body>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<div class="row">
 		<a class="btn btn-primary btn-lg" href="${linkToValidate}">Apasa aici pentru a valida contul</a>
-	</body>
-</html>
+	</div>
+
 

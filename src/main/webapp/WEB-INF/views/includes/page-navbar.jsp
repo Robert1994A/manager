@@ -1,3 +1,5 @@
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="#/home"><span
@@ -63,18 +65,18 @@
 
 			<li class="dropdown dropdown-user"><a class="dropdown-toggle"
 				data-toggle="dropdown"> <img
-					src="./resources/assets/images/demo/users/face11.jpg" alt="">
-					<span>Victoria</span> <i class="caret"></i>
+					src="./resources/assets/images/demo/users/face11.jpg"> <span>
+						<security:authorize access="isAuthenticated()">
+							<security:authentication property="principal.username" />
+						</security:authorize>
+				</span> <i class="caret"></i>
 			</a>
 
 				<ul class="dropdown-menu dropdown-menu-right">
-					<li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
-					<li><a href="#"><i class="icon-coins"></i> My balance</a></li>
-					<li><a href="#"><span class="badge bg-teal-400 pull-right">58</span>
-							<i class="icon-comment-discussion"></i> Messages</a></li>
+					<li><a href="#/profile"><i class="icon-user-plus"></i>My
+							profile</a></li>
 					<li class="divider"></li>
-					<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
-					<li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
+					<li><a href="./logout"><i class="icon-switch2"></i> Logout</a></li>
 				</ul></li>
 		</ul>
 	</div>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ro.inf.ucv.admitere.entity.User;
 import ro.inf.ucv.admitere.entity.UserPersonalData;
 import ro.inf.ucv.admitere.repository.UserPersonalDataRepository;
 
@@ -16,5 +17,9 @@ public class UserPersonalDataService {
 
 	public UserPersonalData save(UserPersonalData userPersonalData) {
 		return userPersonalDataRepository.save(userPersonalData);
+	}
+
+	public UserPersonalData findByUser(User authenticatedUser) {
+		return userPersonalDataRepository.findByUser(authenticatedUser);
 	}
 }

@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Entity implementation class for Entity: Address
@@ -30,13 +33,15 @@ public class Address implements Serializable {
 
 	@OneToOne
 	private City city;
-	
+
 	@OneToOne
 	private County county;
 
 	@OneToOne
 	private State state;
 
+	@NotNull
+	@NotEmpty
 	private String address;
 
 	public Long getId() {
@@ -86,6 +91,5 @@ public class Address implements Serializable {
 	public void setCounty(County county) {
 		this.county = county;
 	}
-
 
 }

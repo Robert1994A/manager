@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ro.inf.ucv.admitere.entity.User;
-import ro.inf.ucv.admitere.exceptions.UserNotFound;
 import ro.inf.ucv.admitere.repository.UserRepository;
 
 @Service
@@ -26,29 +25,29 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	public List<User> findAll() throws UserNotFound {
+	public List<User> findAll() throws Exception {
 		List<User> allUsers = userRepository.findAll();
 		if (allUsers == null) {
-			throw new UserNotFound("Any user not found in databse!");
+			throw new Exception("Any user not found in databse!");
 		}
 		return allUsers;
 	}
 
-	public User findOne(String id) throws UserNotFound {
+	public User findOne(String id) throws Exception {
 		if (id == null) {
-			throw new UserNotFound("User with id " + id + " was not found!");
+			throw new Exception("User with id " + id + " was not found!");
 		}
 		User userFromDatabase = userRepository.findOne(id);
 		if (userFromDatabase == null) {
-			throw new UserNotFound("User with id " + id + " was not found!");
+			throw new Exception("User with id " + id + " was not found!");
 		}
 		return userRepository.findOne(id);
 	}
 
-	public User findByUsername(String username) throws UserNotFound {
+	public User findByUsername(String username) throws Exception {
 		User user = userRepository.findByUsername(username);
 		if (user == null) {
-			throw new UserNotFound("User with username " + username + " was not found!");
+			throw new Exception("User with username " + username + " was not found!");
 		}
 		return user;
 	}

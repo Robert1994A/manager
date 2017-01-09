@@ -1,7 +1,19 @@
 package ro.inf.ucv.admitere.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import ro.inf.ucv.admitere.entity.utils.FormOfEducation;
 import ro.inf.ucv.admitere.entity.utils.FormOfFinancing;
@@ -14,40 +26,61 @@ import ro.inf.ucv.admitere.entity.utils.FormOfFinancing;
 @Table
 public class PreviousFaculty implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
+	@NotNull
+	@NotEmpty
 	private String institutionName;
-	
-	@OneToOne
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@NotNull
+	@NotEmpty
 	private Country country;
-	
-	@OneToOne
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@NotNull
+	@NotEmpty
 	private County county;
-	
-	@OneToOne
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@NotNull
+	@NotEmpty
 	private City city;
-	
+
+	@NotNull
+	@NotEmpty
 	private String facultyName;
-	
+
+	@NotNull
+	@NotEmpty
 	private String profil;
-	
+
+	@NotNull
+	@NotEmpty
 	private String specialization;
-	
+
+	@NotNull
+	@NotEmpty
 	private String obtainingTitle;
-	
+
 	@Enumerated(EnumType.STRING)
+	@NotNull
+	@NotEmpty
 	private FormOfEducation formOfEducation;
-	
+
 	@Enumerated(EnumType.STRING)
+	@NotNull
+	@NotEmpty
 	private FormOfFinancing formOfFinancing;
-	
+
+	@Min(value = 1)
 	private int lengthOfStudies;
-	
+
+	@Min(value = 1900)
 	private int graduationYear;
 
 	public Long getId() {
@@ -153,7 +186,5 @@ public class PreviousFaculty implements Serializable {
 	public void setGraduationYear(int graduationYear) {
 		this.graduationYear = graduationYear;
 	}
-	
-	
-	
+
 }

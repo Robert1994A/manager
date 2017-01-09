@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import ro.inf.ucv.admitere.entity.Contract;
 
 @Repository
-public interface ContractPageRepository extends JpaRepository<Contract, Long> {
+public interface ContractRepository extends JpaRepository<Contract, Long> {
 
 	Page<Contract> findAll(Pageable pageable);
 

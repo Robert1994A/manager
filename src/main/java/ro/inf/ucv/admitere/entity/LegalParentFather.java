@@ -8,6 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import ro.inf.ucv.admitere.entity.utils.EducationLevel;
 
@@ -21,11 +24,17 @@ public class LegalParentFather implements Serializable {
 	@GeneratedValue
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	private String firstName;
 
+	@NotNull
+	@NotEmpty
 	private String lastName;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull
+	@NotEmpty
 	private EducationLevel educationLevel;
 
 	public Long getId() {

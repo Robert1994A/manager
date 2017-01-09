@@ -63,6 +63,8 @@ public class LoginRegisterRecoverControllerPOST extends BaseController {
 			User user = userService.findByUsernameOrEmail(username, username);
 			if (user != null) {
 				String recoverToken = user.getRecoverPaswordToken();
+				user.setEnabled(false);
+				userService.save(user);
 				Mail mail = new Mail();
 				mail.setMailFrom("robertgherlan@gmail.com");
 				mail.setMailTo(user.getEmail());
@@ -91,6 +93,7 @@ public class LoginRegisterRecoverControllerPOST extends BaseController {
 				if (user != null) {
 					user.setPassword(encoder.encode(newPassword));
 					user.setRecoverPaswordToken(generator.getRandomString());
+					user.setEnabled(true);
 					userService.save(user);
 					return "redirect:/login?recoverPassword=true";
 				}

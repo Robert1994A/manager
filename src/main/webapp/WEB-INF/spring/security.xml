@@ -8,18 +8,24 @@
 	<security:global-method-security
 		pre-post-annotations="enabled" secured-annotations="enabled" />
 
-	<security:http auto-config="true">
+	<security:http auto-config="true" use-expressions="true">
 		<security:form-login login-page="/login"
 			authentication-failure-url="/login?error=true" password-parameter="password"
 			username-parameter="username" default-target-url="/#home"
 			login-processing-url="/login_spring_security" />
 		<!-- <security:intercept-url pattern="/templates/**" access="isFullyAuthenticated()"/> -->
+		<security:intercept-url pattern="/update"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/login"
+			access="permitAll" />
 		<security:logout logout-url="/logout"
 			logout-success-url="/login?logout=true" />
 		<security:intercept-url pattern="/login"
 			access="permitAll()" />
 		<security:csrf disabled="true" />
-		<security:remember-me use-secure-cookie="true" remember-me-parameter="remember_me" key="asdasfasfasfasfafs" token-validity-seconds="604800"/>
+		<security:remember-me use-secure-cookie="true"
+			remember-me-parameter="remember_me" key="asdasfasfasfasfafs"
+			token-validity-seconds="604800" />
 
 	</security:http>
 

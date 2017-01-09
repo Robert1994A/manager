@@ -5,10 +5,15 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import ro.inf.ucv.admitere.entity.utils.FormOfEducation;
 
@@ -26,27 +31,38 @@ public class PreviousHighSchool implements Serializable {
 	@GeneratedValue
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	private String absolvedInstitution;
 
-	@OneToOne
+	@NotNull
+	@OneToOne(fetch = FetchType.LAZY)
 	private Country country;
 
-	@OneToOne
+	@NotNull
+	@OneToOne(fetch = FetchType.LAZY)
 	private City city;
 
-	@OneToOne
+	@NotNull
+	@OneToOne(fetch = FetchType.LAZY)
 	private County county;
 
+	@NotNull
+	@NotEmpty
 	private String profil;
 
-	private int lenghtOfStudies;
+	@Min(value = 1)
+	private int lengthOfStudies;
 
+	@Min(value = 1900)
 	private int graduationYear;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private FormOfEducation formOfEducation;
-	
-	@OneToOne
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@NotNull
 	private HighSchoolDiploma highSchoolDiploma;
 
 	public Long getId() {
@@ -97,12 +113,12 @@ public class PreviousHighSchool implements Serializable {
 		this.profil = profil;
 	}
 
-	public int getLenghtOfStudies() {
-		return lenghtOfStudies;
+	public int getLengthOfStudies() {
+		return lengthOfStudies;
 	}
 
-	public void setLenghtOfStudies(int lenghtOfStudies) {
-		this.lenghtOfStudies = lenghtOfStudies;
+	public void setLengthOfStudies(int lengthOfStudies) {
+		this.lengthOfStudies = lengthOfStudies;
 	}
 
 	public int getGraduationYear() {

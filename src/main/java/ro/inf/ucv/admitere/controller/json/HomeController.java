@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import ro.inf.ucv.admitere.entity.Contract;
 import ro.inf.ucv.admitere.entity.Role;
 import ro.inf.ucv.admitere.entity.User;
-import ro.inf.ucv.admitere.exceptions.UserNotFound;
 import ro.inf.ucv.admitere.utils.Generator;
 
 /**
@@ -19,9 +21,12 @@ import ro.inf.ucv.admitere.utils.Generator;
  */
 @Controller
 @EnableWebMvc
-public class HomeControllerRest extends BaseController {
+@PropertySource(value = "classpath:config.properties")
+public class HomeController extends BaseController {
 
-	public void initDatabase() {
+	private String googleMapsAPIKey = "AIzaSyAIa0k0JGw-N3SFeVrsP13SLJGb7mgn-Kc";
+
+	public void initDatabaseUsers() {
 		Generator myGenerator = new Generator();
 
 		Role roleAdmin = new Role();
@@ -92,11 +97,27 @@ public class HomeControllerRest extends BaseController {
 
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() throws UserNotFound {
-		if (userService.findAll().isEmpty()) {
-			initDatabase();
+	public void initDatabaseContract() {
+		for (int i = 0; i < 100; i++) {
+			Contract contract = new Contract();
+			contract.setContent(new StringBuilder("content" + i));
+			contract.setDescription("description" + i);
+			contract.setName("name" + i);
+			contract.setPublished(true);
+			contract.setPublishedDate(new Date());
+			contractPageService.save(contract);
 		}
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) throws Exception {
+		if (userService.findAll().isEmpty()) {
+			initDatabaseUsers();
+		}
+		if (contractPageService.findAll().isEmpty()) {
+			initDatabaseContract();
+		}
+		model.addAttribute("googleAPIKey", googleMapsAPIKey);
 		return "home";
 	}
 

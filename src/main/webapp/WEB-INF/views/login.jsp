@@ -99,6 +99,16 @@
 								<span class="text-semibold">Well done!</span>You changed the password succesfully.
 							</div>
 						</c:if>
+						
+						<c:if test="${param.logout == true}">
+							<div
+								class="alert alert-success alert-styled-right alert-arrow-right alert-bordered">
+								<button type="button" class="close" data-dismiss="alert">
+									<span>×</span><span class="sr-only">Close</span>
+								</button>
+								<span class="text-semibold">You have successfully logged out!</span>
+							</div>
+						</c:if>
 
 						<c:if test="${param.validatedAccount == false}">
 							<div class="alert bg-danger alert-styled-left">

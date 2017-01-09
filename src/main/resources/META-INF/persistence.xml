@@ -25,6 +25,8 @@
         <class>ro.inf.ucv.admitere.entity.LegalParentFather</class>
         <class>ro.inf.ucv.admitere.entity.LegalParentMother</class>
         <class>ro.inf.ucv.admitere.entity.Specialization</class>
+        <class>ro.inf.ucv.admitere.entity.PersonalFile</class>
+        <class>ro.inf.ucv.admitere.entity.ExampleFile</class>
         <properties>
         	<property name="eclipselink.profiler" value="PerformanceProfiler"/>
         </properties>

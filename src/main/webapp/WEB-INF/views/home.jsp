@@ -12,11 +12,15 @@
 <title>Admitere</title>
 
 <script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?libraries=places&key=${googleAPIKey}"></script>
+
+<script type="text/javascript"
 	src="./resources/assets/js/core/libraries/jquery.min.js"></script>
 <script src="./resources/myscripts/angular/angular.js"></script>
 
 <script src="./resources/myscripts/angular/angular_module.js"></script>
 <script src="./resources/myscripts/angular/ng_infinite_scroll.js"></script>
+<script src="./resources/myscripts/angular/ng_autocomplete.js"></script>
 <script src="./resources/myscripts/angular/angular-route.js"></script>
 
 <!-- Global stylesheets -->
@@ -44,33 +48,33 @@
 	src="./resources/assets/js/core/libraries/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="./resources/assets/js/plugins/loaders/blockui.min.js"></script>
-<!-- /core JS files -->
 
-<!-- Theme JS files -->
-
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/visualization/d3/d3.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
 <script type="text/javascript"
 	src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/ui/moment/moment.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/pickers/daterangepicker.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/ui/nicescroll.min.js"></script>
-<!-- /theme JS files -->
+
 
 <script type="text/javascript" src="./resources/ckeditor/ckeditor.js"></script>
 
 
-<!-- Theme JS files -->
 <script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
-<!-- /theme JS files -->
 
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/notifications/pnotify.min.js"></script>
+
+<script type="text/javascript"
+	src="./resources/assets/js/pages/components_notifications_pnotify.js"></script>
+
+<script type="text/javascript"
+	src='<c:url value="./resources/assets/js/validation/jquery.form-validator.min.js"/>'></script>
+
+<script type="text/javascript"
+	src="<c:url value="./resources/assets/js/validation/validate.js"/>"></script>
+
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/pickers/anytime.min.js"></script>
+
+<script type="text/javascript"
+	src="./resources/assets/js/plugins/uploaders/fileinput.min.js"></script>
 </head>
 
 <body class="navbar-top" ng-app="HomeApp">
@@ -120,9 +124,11 @@
 
 	</div>
 	<!-- /page container -->
+	<script src="./resources/myscripts/utils.js"></script>
 	<script src="./resources/myscripts/angular/ui-bootstrap-tpls-2.0.1.js"></script>
 	<script src="./resources/myscripts/angular/angular-animate.js"></script>
 	<script src="./resources/myscripts/routing.js"></script>
+	<script src="./resources/myscripts/services/ResponseUtilService.js"></script>
 	<script src="./resources/myscripts/services/UserService.js"></script>
 	<script src="./resources/myscripts/controllers/UserController.js"></script>
 	<script src="./resources/myscripts/services/FormService.js"></script>
@@ -133,17 +139,23 @@
 		src="./resources/myscripts/controllers/ContractPageController.js"></script>
 	<script src="./resources/myscripts/services/ProfileService.js"></script>
 	<script src="./resources/myscripts/controllers/ProfileController.js"></script>
-	<!-- 
+
 	<script type="text/javascript">
 		$("#navbar li").click(function(e) {
 			$("li").removeClass("active");
 			$(this).addClass("active");
 		});
+
 		$(".navbar-brand").click(function() {
 			$("#navbar li").removeClass("active");
 			$("#homePage").addClass("active");
 		});
+
+		$(".hidden-ul li").click(function() {
+			$("li").removeClass("active");
+			$(this).addClass("active");
+		});
 	</script>
- -->
+
 </body>
 </html>

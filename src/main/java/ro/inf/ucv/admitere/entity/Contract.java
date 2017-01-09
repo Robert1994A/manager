@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table
 public class Contract implements Serializable {
@@ -25,20 +27,20 @@ public class Contract implements Serializable {
 	private Long id;
 
 	@NotNull
-	@Size(min=5, max=255)
+	@Size(min = 5, max = 255)
 	private String name;
 
-	@NotNull
 	private boolean published;
 
 	@NotNull
 	private Date publishedDate;
 
 	@NotNull
-	@Size(min=5, max=255)
+	@Size(min = 5, max = 255)
 	private String description;
 
 	@NotNull
+	@NotEmpty
 	private StringBuilder content;
 
 	@OneToOne

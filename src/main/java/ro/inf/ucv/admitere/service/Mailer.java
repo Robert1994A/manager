@@ -3,12 +3,15 @@ package ro.inf.ucv.admitere.service;
 import java.io.StringWriter;
 import java.util.HashMap;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import ro.inf.ucv.admitere.mailer.Mail;
@@ -17,12 +20,12 @@ import ro.inf.ucv.admitere.mailer.Mail;
 public class Mailer {
 
 	@Autowired
-	private MailSender mailSender;
+	private JavaMailSenderImpl mailSender;
 
 	@Autowired
 	private VelocityEngine velocityEngine;
 
-	public void setMailSender(MailSender mailSender) {
+	public void setMailSender(JavaMailSenderImpl mailSender) {
 		this.mailSender = mailSender;
 	}
 
@@ -31,20 +34,22 @@ public class Mailer {
 	}
 
 	public void sendMail(Mail mail, HashMap<String, String> velocityContextMap) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom(mail.getMailFrom());
-		message.setTo(mail.getMailTo());
-		message.setSubject(mail.getMailSubject());
 
 		Template template = velocityEngine.getTemplate("./templates/" + mail.getTemplateName());
 		VelocityContext velocityContext = new VelocityContext(velocityContextMap);
-
 		StringWriter stringWriter = new StringWriter();
-
 		template.merge(velocityContext, stringWriter);
+		MimeMessage message = mailSender.createMimeMessage();
 
-		message.setText(stringWriter.toString());
-
+		MimeMessageHelper helper;
+		try {
+			helper = new MimeMessageHelper(message, true);
+			helper.setTo(mail.getMailTo());
+			helper.setSubject(mail.getMailSubject());
+			helper.setText(stringWriter.toString(), true);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		mailSender.send(message);
 	}
 }

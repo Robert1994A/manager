@@ -1,13 +1,15 @@
 package ro.inf.ucv.admitere.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Entity implementation class for Entity: PreviousFacultyDiploma
@@ -23,24 +25,29 @@ public class PreviousFacultyDiploma implements Serializable {
 	@GeneratedValue
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	private String type;
 
+	@Min(value = 1)
 	private Long seria;
 
+	@Min(value = 1)
 	private Long number;
 
+	@NotNull
+	@NotEmpty
 	private String emitedBy;
 
+	@Min(value = 1900)
 	private int emitedYear;
-	
+
+	@Min(value = 1)
 	private int matricolNumber;
-	
+
 	private boolean validatedByDGRIAEorCNRED;
-	
+
 	private Long seriaDGRIAEorCNRED;
-	
-	@OneToMany
-	private Set<File> files;
 
 	public Long getId() {
 		return id;
@@ -113,15 +120,5 @@ public class PreviousFacultyDiploma implements Serializable {
 	public void setSeriaDGRIAEorCNRED(Long seriaDGRIAEorCNRED) {
 		this.seriaDGRIAEorCNRED = seriaDGRIAEorCNRED;
 	}
-
-	public Set<File> getFiles() {
-		return files;
-	}
-
-	public void setFiles(Set<File> files) {
-		this.files = files;
-	}
-	
-	
 
 }

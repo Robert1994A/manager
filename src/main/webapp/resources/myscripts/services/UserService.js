@@ -1,30 +1,63 @@
 var applicationName = "/admitere/";
 
-app.service('UserService', function($http, $q) {
+app.service('UserService', function($http, $q, ResponseUtilService) {
 	var deferred = $q.defer();
 
 	this.deleteAccount = function(id) {
 		$http.post(applicationName + "users/deleteAccount/" + id).then(
-				function(data) {
-					deferred.resolve(data);
+				function(response) {
+					if (typeof response.data === 'object') {
+						ResponseUtilService.handleReponse(response.data);
+						return response.data;
+					} else {
+						// invalid response
+						ResponseUtilService.handleReponse(response.data);
+						return $q.reject(response.data);
+					}
+
+				}, function(response) {
+					// something went wrong
+					ResponseUtilService.handleReponse(response.data);
+					return $q.reject(response.data);
 				});
-		return deferred.promise;
 	}
 
 	this.disableAccount = function(id) {
 		$http.post(applicationName + "users/disableAccount/" + id).then(
-				function(data) {
-					deferred.resolve(data);
+				function(response) {
+					if (typeof response.data === 'object') {
+						ResponseUtilService.handleReponse(response.data);
+						return response.data;
+					} else {
+						// invalid response
+						ResponseUtilService.handleReponse(response.data);
+						return $q.reject(response.data);
+					}
+
+				}, function(response) {
+					// something went wrong
+					ResponseUtilService.handleReponse(response.data);
+					return $q.reject(response.data);
 				});
-		return deferred.promise;
 	}
 
 	this.enableAccount = function(id) {
 		$http.post(applicationName + "users/enableAccount/" + id).then(
-				function(data) {
-					deferred.resolve(data);
+				function(response) {
+					if (typeof response.data === 'object') {
+						ResponseUtilService.handleReponse(response.data);
+						return response.data;
+					} else {
+						// invalid response
+						ResponseUtilService.handleReponse(response.data);
+						return $q.reject(response.data);
+					}
+
+				}, function(response) {
+					// something went wrong
+					ResponseUtilService.handleReponse(response.data);
+					return $q.reject(response.data);
 				});
-		return deferred.promise;
 	}
 });
 
@@ -49,6 +82,9 @@ app.factory('Reddit', function($http) {
 		if (this.totalPages !== undefined && this.totalPages === this.after) {
 			this.lastPage = true;
 			return;
+		}
+		if (this.searchUser == undefined) {
+			this.searchUser = "";
 		}
 		var url = applicationName + "users/paginate?pageNumber=" + this.after
 				+ "&pageSize=" + this.perPage + "&sortBy=" + this.sortBy

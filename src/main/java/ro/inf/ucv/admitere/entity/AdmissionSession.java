@@ -1,36 +1,50 @@
 package ro.inf.ucv.admitere.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table
 public class AdmissionSession {
 
 	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid")
-	@Column(columnDefinition = "CHAR(32)")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column
 	@Id
 	private String id;
 
+	@NotNull
+	@NotEmpty
 	private String name;
 
+	@NotNull
+	@NotEmpty
 	private String description;
 
+	@NotNull
 	private Date startDate;
 
+	@NotNull
 	private Date endDate;
-	
-	@OneToOne
-	private University universiry;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	private Department department;
+
+	@OneToMany
+	private List<ExampleFile> exampleFile;
 
 	public String getName() {
 		return name;
@@ -72,12 +86,20 @@ public class AdmissionSession {
 		this.id = id;
 	}
 
-	public University getUniversiry() {
-		return universiry;
+	public Department getDepartment() {
+		return department;
 	}
 
-	public void setUniversiry(University universiry) {
-		this.universiry = universiry;
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public List<ExampleFile> getExampleFile() {
+		return exampleFile;
+	}
+
+	public void setExampleFile(List<ExampleFile> exampleFile) {
+		this.exampleFile = exampleFile;
 	}
 
 }
