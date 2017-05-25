@@ -1,0 +1,10 @@
+<ul>
+	<li>${name}</li>
+	<li>${email}</li>
+	<li>${phone}</li>
+	<li>${message}</li>
+</ul>
+
+
+
+

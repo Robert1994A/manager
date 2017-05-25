@@ -1,161 +1,104 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admitere</title>
-
-<script type="text/javascript"
-	src="http://maps.googleapis.com/maps/api/js?libraries=places&key=${googleAPIKey}"></script>
-
-<script type="text/javascript"
-	src="./resources/assets/js/core/libraries/jquery.min.js"></script>
-<script src="./resources/myscripts/angular/angular.js"></script>
-
-<script src="./resources/myscripts/angular/angular_module.js"></script>
-<script src="./resources/myscripts/angular/ng_infinite_scroll.js"></script>
-<script src="./resources/myscripts/angular/ng_autocomplete.js"></script>
-<script src="./resources/myscripts/angular/angular-route.js"></script>
-
-<!-- Global stylesheets -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"
-	rel="stylesheet" type="text/css">
-<link href="./resources/assets/css/icons/icomoon/styles.css"
-	rel="stylesheet" type="text/css">
-<link href="./resources/assets/css/bootstrap.css" rel="stylesheet"
-	type="text/css">
-<link href="./resources/assets/css/core.css" rel="stylesheet"
-	type="text/css">
-<link href="./resources/assets/css/components.css" rel="stylesheet"
-	type="text/css">
-<link href="./resources/assets/css/colors.css" rel="stylesheet"
-	type="text/css">
-<!-- /global stylesheets -->
-
-<!-- Core JS files -->
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/loaders/pace.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/core/libraries/jquery.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/core/libraries/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/loaders/blockui.min.js"></script>
-
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
+<title><spring:message code="title" /></title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
 
 
-<script type="text/javascript" src="./resources/ckeditor/ckeditor.js"></script>
+<%@ include file="include/script_files.jsp"%>
 
-
-<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
-
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/notifications/pnotify.min.js"></script>
-
-<script type="text/javascript"
-	src="./resources/assets/js/pages/components_notifications_pnotify.js"></script>
-
-<script type="text/javascript"
-	src='<c:url value="./resources/assets/js/validation/jquery.form-validator.min.js"/>'></script>
-
-<script type="text/javascript"
-	src="<c:url value="./resources/assets/js/validation/validate.js"/>"></script>
-
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/pickers/anytime.min.js"></script>
-
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/uploaders/fileinput.min.js"></script>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
 
-<body class="navbar-top" ng-app="HomeApp">
-	<!-- Main navbar -->
-	<%@ include file="./includes/page-navbar.jsp"%>
-	<!-- /main navbar -->
+		<!--START HEADER =============================================== -->
+		<%@ include file="include/header.jsp"%>
+		<!--END HEADER =============================================== -->
+
+		<!--START SIDEBAR =============================================== -->
+		<%@ include file="include/sidebar.jsp"%>
+		<!--END SIDEBAR =============================================== -->
 
 
-	<!-- Page container -->
-	<div class="page-container">
-
-		<!-- Page content -->
-		<div class="page-content">
-
-			<!-- Main sidebar -->
-			<%@ include file="./includes/page-sidebar.jsp"%>
-			<!-- /main sidebar -->
-
+		<!--START CONTENT =============================================== -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>Home</h1>
+				<ol class="breadcrumb">
+					<li class="active"><i class="fa fa-home"></i> Home</li>
+				</ol>
+			</section>
 
 			<!-- Main content -->
-			<div class="content-wrapper">
+			<section class="content">
 
-				<!-- Page header -->
-				<!--  <%@ include file="./includes/page-header.jsp"%> -->
-				<!-- /page header -->
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Home</h3>
 
-
-				<!-- Content area -->
-				<div class="content">
-
-					<!-- Content -->
-					<ng-view></ng-view>
-					<!-- /content -->
-
-					<!-- Footer -->
-					<%@ include file="./includes/page-footer.jsp"%>
-					<!-- /footer -->
-
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-box-tool"
+								data-widget="remove" data-toggle="tooltip" title="Remove">
+								<i class="fa fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<ul>
+							<li class="text-aqua">
+								<h3>Flexible and reliable system for digital certificate
+									issuance and lifecycle management</h3>
+							</li>
+							<li class="text-aqua"><h3>Centralizes and made
+									management of cryptographic keys and digital certificates</h3></li>
+							<li class="text-aqua"><h3>Know when your website's SSL
+									certificates will expire</h3></li>
+							<li class="text-aqua"><h3>More details about your
+									certificates</h3></li>
+							<li class="text-aqua"><h3>Our tool offer support for
+									retrieving certificates details from a specific URL</h3></li>
+						</ul>
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<blockquote>
+							<p>Securing a computer system has traditionally been a battle
+								of wits: the penetrator tries to find the holes, and the
+								designer tries to close them.</p>
+						</blockquote>
+					</div>
+					<!-- /.box-footer-->
 				</div>
-				<!-- /content area -->
+				<!-- /.box -->
 
-			</div>
-			<!-- /main content -->
-
+			</section>
+			<!-- /.content -->
 		</div>
-		<!-- /page content -->
+		<!--END CONTENT=============================================== -->
 
+		<!--START FOOTER=============================================== -->
+		<%@ include file="include/footer.jsp"%>
+		<!--END FOOTER=============================================== -->
 	</div>
-	<!-- /page container -->
-	<script src="./resources/myscripts/utils.js"></script>
-	<script src="./resources/myscripts/angular/ui-bootstrap-tpls-2.0.1.js"></script>
-	<script src="./resources/myscripts/angular/angular-animate.js"></script>
-	<script src="./resources/myscripts/routing.js"></script>
-	<script src="./resources/myscripts/services/ResponseUtilService.js"></script>
-	<script src="./resources/myscripts/services/UserService.js"></script>
-	<script src="./resources/myscripts/controllers/UserController.js"></script>
-	<script src="./resources/myscripts/services/FormService.js"></script>
-	<script src="./resources/myscripts/controllers/FormController.js"></script>
-	<script src="./resources/myscripts/controllers/HomeController.js"></script>
-	<script src="./resources/myscripts/services/ContractPageService.js"></script>
-	<script
-		src="./resources/myscripts/controllers/ContractPageController.js"></script>
-	<script src="./resources/myscripts/services/ProfileService.js"></script>
-	<script src="./resources/myscripts/controllers/ProfileController.js"></script>
-
-	<script type="text/javascript">
-		$("#navbar li").click(function(e) {
-			$("li").removeClass("active");
-			$(this).addClass("active");
-		});
-
-		$(".navbar-brand").click(function() {
-			$("#navbar li").removeClass("active");
-			$("#homePage").addClass("active");
-		});
-
-		$(".hidden-ul li").click(function() {
-			$("li").removeClass("active");
-			$(this).addClass("active");
-		});
-	</script>
-
+	<!-- ./wrapper -->
 </body>
 </html>

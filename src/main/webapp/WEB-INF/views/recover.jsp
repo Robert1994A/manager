@@ -1,142 +1,81 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
-<html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Recover</title>
+<title>Recover password</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
 
-<!-- Global stylesheets -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"
-	rel="stylesheet" type="text/css">
-<link href="./resources/assets/css/icons/icomoon/styles.css"
-	rel="stylesheet" type="text/css">
-<link href="./resources/assets/css/bootstrap.css" rel="stylesheet"
-	type="text/css">
-<link href="./resources/assets/css/core.css" rel="stylesheet"
-	type="text/css">
-<link href="./resources/assets/css/components.css" rel="stylesheet"
-	type="text/css">
-<link href="./resources/assets/css/colors.css" rel="stylesheet"
-	type="text/css">
-<!-- /global stylesheets -->
+<%@ include file="include/script_files.jsp"%>
 
-<!-- Core JS files -->
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/loaders/pace.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/core/libraries/jquery.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/core/libraries/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/loaders/blockui.min.js"></script>
-<!-- /core JS files -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-<!-- Theme JS files -->
-<script type="text/javascript"
-	src="./resources/assets/js/plugins/forms/styling/uniform.min.js"></script>
 
-<script type="text/javascript" src="./resources/assets/js/core/app.js"></script>
-
-<!-- /theme JS files -->
-
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
+<body class="hold-transition login-page">
+	<div class="login-box">
+		<div class="login-logo">
+			<a href="${pageContext.request.contextPath}/admin"><b><spring:message
+						code="title" /></b></a>
+		</div>
+		<!-- /.login-logo -->
+		<div class="login-box-body">
 
-<body class="login-container">
+			<%@ include file="include/captchaError.jsp"%>
 
+			<%@ include file="include/authenticationError.jsp"%>
 
-	<!-- Navbar -->
-	<%@ include file="./includes/login-navbar.jsp"%>
-	<!-- /Navbar -->
+			<p class="login-box-msg">Insert username or email to recover
+				password.</p>
 
-	<!-- Page container -->
-	<div class="page-container">
-
-		<!-- Page content -->
-		<div class="page-content">
-
-			<!-- Main content -->
-			<div class="content-wrapper">
-
-				<!-- Content area -->
-				<div class="content">
-
-					<div class="col-md-3"></div>
-					<!-- Advanced login -->
-					<div class="col-md-6">
-						<c:if test="${param.error == false}">
-							<div
-								class="alert alert-success alert-styled-right alert-arrow-right alert-bordered">
-								<button type="button" class="close" data-dismiss="alert">
-									<span>×</span><span class="sr-only">Close</span>
-								</button>
-								<span class="text-semibold">Well done!</span>An email was send
-								to recover your password.
-							</div>
-						</c:if>
-
-						<c:if test="${param.error == true}">
-							<div class="alert bg-danger alert-styled-left">
-								<button type="button" class="close" data-dismiss="alert">
-									<span>×</span><span class="sr-only">Close</span>
-								</button>
-								<span class="text-semibold">Oh snap!</span> An error appear when
-								we try to process your request.
-							</div>
-						</c:if>
-						<form id="recover_form" method="POST" action="./recover">
-							<div class="panel panel-body login-form">
-								<div class="text-center">
-									<div class="icon-object border-success text-success">
-										<i class="icon-reset"></i>
-									</div>
-									<h5 class="content-group">Recover your account</h5>
-								</div>
-
-								<div class="form-group">
-									<input name="username" type="text" class="form-control"
-										placeholder="Insert your email or your username(CNP) to recover your password" />
-								</div>
-
-								<div class="form-group">
-									<button type="submit" class="btn bg-teal btn-block btn-lg">
-										Recover <i class="icon-circle-right2 position-right"></i>
-									</button>
-								</div>
-
-								<div class="content-divider text-muted form-group">
-									<span>You have an account?</span>
-								</div>
-								<a href="<c:url value='/login'/>"
-									class="btn btn-default btn-block content-group">Back to
-									login</a>
-							</div>
-						</form>
-						<!-- /advanced login -->
-					</div>
-					<div class="col-md-3"></div>
-
-					<!-- Footer -->
-					<%@ include file="./includes/page-footer.jsp"%>
-					<!-- /footer -->
-
+			<form action="./recover" method="post">
+				<div class="form-group has-feedback">
+					<input type="text" class="form-control" required="required"
+						name="username"
+						placeholder="Insert username or email to recover
+				password.">
+					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
-				<!-- /content area -->
 
-			</div>
-			<!-- /main content -->
+				<div class="form-group has-feedback">
+					<div class="g-recaptcha" data-sitekey="${captchaSiteKey}"></div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-xs-12">
+						<button type="submit" class="btn btn-primary btn-block btn-flat">Recover</button>
+					</div>
+				</div>
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			</form>
+
+			<br /> <a href="${pageContext.request.contextPath}/login">Login
+				page</a>
 
 		</div>
-		<!-- /page content -->
-
+		<!-- /.login-box-body -->
 	</div>
-	<!-- /page container -->
-
+	<!-- /.login-box -->
+	<script>
+		$(function() {
+			$('input').iCheck({
+				checkboxClass : 'icheckbox_square-blue',
+				radioClass : 'iradio_square-blue',
+				increaseArea : '20%' // optional
+			});
+		});
+	</script>
 </body>
-
 </html>

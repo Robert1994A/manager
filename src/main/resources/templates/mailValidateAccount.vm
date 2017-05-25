@@ -2,6 +2,11 @@
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 	<div class="row">
+		<ul>
+			<li>Nume utilizator:  <b>${username}</b></li>
+			<li>Parola:  <b>${password}</b></li>
+		</ul>
+		
 		<a class="btn btn-primary btn-lg" href="${linkToValidate}">Apasa aici pentru a valida contul</a>
 	</div>
 

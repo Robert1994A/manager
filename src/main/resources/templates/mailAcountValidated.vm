@@ -4,9 +4,9 @@
 	</head>
 
 	<body>
-		${message}.
+		<b>Contul dumneavoastra a fost validat cu success.</b><br/>
+		Pentru a va autentifica va rugam sa accesati urmatorul link. <a href="${loginURL}">Autentificare</a>
 		
-		Your username is "${username}".
 	</body>
 </html>
 
